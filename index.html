@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>medanestezi — anestezi araçları ve notları</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eaf0f1; --ink:#12353d; --muted:#5a717a; --line:#d4e0e2; --card:#ffffff;
+  --petrol:#0d4b55; --signal:#0a9ca3; --pulse:#d2453f;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  font-feature-settings:"tnum" 1;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:660px;margin:0 auto;padding:30px 20px 60px}
+
+/* brand */
+.brand{display:flex;align-items:center;gap:12px}
+.mark{flex:0 0 auto}
+.brand .name{font-weight:700;font-size:25px;letter-spacing:-.5px;color:var(--petrol)}
+.brand .name b{color:var(--signal);font-weight:700}
+.lead{margin:20px 0 4px;font-size:20px;font-weight:500;max-width:34ch;line-height:1.35}
+.sub{color:var(--muted);font-size:15px;margin:0}
+
+/* tools */
+.tools{margin-top:34px;display:flex;flex-direction:column;gap:12px}
+.tool{display:block;text-decoration:none;color:inherit;background:var(--card);
+  border:1px solid var(--line);border-radius:14px;padding:18px 18px 18px 20px;
+  position:relative;overflow:hidden;transition:border-color .15s,transform .05s}
+.tool::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--signal);
+  transform:scaleY(0);transform-origin:top;transition:transform .18s}
+.tool:hover,.tool:focus-visible{border-color:var(--signal);outline:none}
+.tool:hover::before,.tool:focus-visible::before{transform:scaleY(1)}
+.tool:active{transform:translateY(1px)}
+.tool .t{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.tool h2{font-size:17px;margin:0;font-weight:600}
+.tool .tag{font-size:12px;font-weight:600;color:var(--petrol);background:#e3f0f0;
+  padding:3px 10px;border-radius:20px;flex:0 0 auto}
+.tool .tag.soon{color:var(--muted);background:#eef2f3}
+.tool p{margin:6px 0 0;color:var(--muted);font-size:14.5px;max-width:52ch}
+.tool.disabled{pointer-events:none;opacity:.72}
+
+.foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
+  color:var(--muted);font-size:13px;line-height:1.55}
+.foot b{color:var(--ink);font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">
+    <svg class="mark" width="42" height="42" viewBox="0 0 42 42" aria-hidden="true">
+      <rect x="1" y="1" width="40" height="40" rx="11" fill="#0d4b55"/>
+      <path d="M6 21 H14 L17 12 L22 29 L25 21 H36" fill="none" stroke="#0a9ca3"
+        stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="name">med<b>anestezi</b></div>
+  </div>
+
+  <p class="lead">Anestezi pratiği için hızlı hesap araçları ve klinik notlar.</p>
+  <p class="sub">Ağırlığı gir, güvenilir sonucu al. Kaynaklar her aracın altında.</p>
+
+  <nav class="tools">
+    <a class="tool" href="ameliyat-sivi/">
+      <div class="t"><h2>Ameliyat Sıvı Planı</h2><span class="tag">hesap</span></div>
+      <p>Kilo, açlık süresi ve operasyon katsayısına göre saat saat intraoperatif sıvı planı (4-2-1).</p>
+    </a>
+
+    <a class="tool" href="mabl/">
+      <div class="t"><h2>Pediyatrik MABL</h2><span class="tag">hesap</span></div>
+      <p>İzin verilen maksimum kan kaybı; gelişim dönemi, kilo ve hematokrit değerlerinden.</p>
+    </a>
+
+    <a class="tool" href="notlar/">
+      <div class="t"><h2>Klinik Notlar</h2><span class="tag">bilgi</span></div>
+      <p>Hızlı başvuru notları — preoperatif açlık süreleri ile başlıyor.</p>
+    </a>
+
+    <a class="tool disabled" href="#" aria-disabled="true">
+      <div class="t"><h2>Nöbet İstek Sistemi</h2><span class="tag soon">ayrı uygulama</span></div>
+      <p>Hekimlerin nöbet istemediği günleri girdiği takvim. Mevcut adresini buraya bağlayabiliriz.</p>
+    </a>
+  </nav>
+
+  <p class="foot"><b>Uyarı.</b> Bu sitedeki araçlar ve notlar yalnızca hesaplamaya yardımcı başvuru niteliğindedir;
+  klinik muhakemenin yerine geçmez. Tüm sonuçları hastaya uygulamadan önce kendi protokolünüzle doğrulayın.</p>
+</div>
+</body>
+</html>

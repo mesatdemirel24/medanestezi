@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ameliyat Sıvı Planı</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EEF2F1; --surface:#FFFFFF; --ink:#15302C; --ink-soft:#5A6E6A;
+    --teal:#0E6B63; --teal-bright:#12857A; --line:#DDE5E3;
+    --aclik:#C56A2E; --idame:#0E6B63; --op:#3E7CB1;
+    --row-alt:#F6F9F8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);
+    min-height:100dvh;display:flex;justify-content:center;padding:20px 14px 40px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .app{width:100%;max-width:480px}
+
+  header{margin-bottom:20px}
+  .eyebrow{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:6px}
+  h1{font-size:25px;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+  .sub{font-size:13px;color:var(--ink-soft);margin-top:6px}
+
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px}
+
+  .field{margin-bottom:16px}
+  .field:last-child{margin-bottom:0}
+  .field label{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:3px}
+  .field .hint{font-size:11.5px;color:var(--ink-soft);margin-bottom:8px}
+  .in-row{display:flex;align-items:baseline;border-bottom:2px solid var(--line);padding-bottom:4px}
+  .in-row:focus-within{border-color:var(--teal)}
+  .in-row input{
+    flex:1;border:none;outline:none;background:transparent;
+    font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:28px;color:var(--ink);padding:0;
+  }
+  .in-row input::-webkit-outer-spin-button,.in-row input::-webkit-inner-spin-button{-webkit-appearance:none}
+  .in-row input::placeholder{color:#C4D0CD}
+  .in-row .unit{font-family:'IBM Plex Mono',monospace;font-size:15px;color:var(--ink-soft);margin-left:8px}
+
+  /* özet */
+  .summary{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--line);border-radius:14px;overflow:hidden;margin-bottom:14px}
+  .sum-cell{background:var(--surface);padding:14px 12px;text-align:center}
+  .sum-cell .k{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px}
+  .sum-cell .v{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:20px;color:var(--ink)}
+  .sum-cell .u{font-size:11px;color:var(--ink-soft);margin-top:2px}
+  .sum-cell.aclik .v{color:var(--aclik)} .sum-cell.idame .v{color:var(--idame)} .sum-cell.op .v{color:var(--op)}
+
+  /* tablo */
+  .table-title{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:4px 2px 12px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th,td{padding:9px 6px;text-align:right}
+  th:first-child,td:first-child{text-align:left}
+  thead th{font-size:11px;font-weight:600;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.03em;border-bottom:1.5px solid var(--line)}
+  tbody td{font-family:'IBM Plex Mono',monospace;border-bottom:1px solid var(--line)}
+  tbody tr:nth-child(even){background:var(--row-alt)}
+  td.saat{font-family:'Inter',sans-serif;font-weight:600}
+  td.c-aclik{color:var(--aclik)} td.c-idame{color:var(--idame)} td.c-op{color:var(--op)}
+  td.total{font-weight:600;color:var(--ink)}
+  tfoot td{font-family:'IBM Plex Mono',monospace;font-weight:600;border-top:2px solid var(--ink);padding-top:11px}
+  tfoot td.saat{font-family:'Inter',sans-serif}
+  tfoot td.c-aclik{color:var(--aclik)} tfoot td.c-idame{color:var(--idame)} tfoot td.c-op{color:var(--op)}
+  .grand{background:var(--teal);color:#fff;border-radius:12px;padding:14px 16px;margin-top:14px;display:flex;justify-content:space-between;align-items:center}
+  .grand .lbl{font-size:13px;color:rgba(255,255,255,.8)}
+  .grand .val{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:22px}
+
+  .warn{font-size:12px;color:var(--aclik);background:#FBF0E7;border-radius:10px;padding:10px 12px;margin-top:12px;line-height:1.45}
+  .empty{color:var(--ink-soft);font-size:14px;text-align:center;padding:20px 0}
+  .note{font-size:12px;line-height:1.5;color:var(--ink-soft);padding:0 4px;margin-top:6px}
+  .note strong{color:var(--ink);font-weight:600}
+  .legend-mini{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--ink-soft);margin-bottom:10px}
+  .legend-mini span{display:flex;align-items:center;gap:5px}
+  .legend-mini i{width:9px;height:9px;border-radius:2px;display:inline-block}
+</style>
+</head>
+<body>
+<div class="app">
+  <a href="../" style="display:inline-block;text-decoration:none;color:var(--ink-soft);font-size:13px;font-weight:600;margin-bottom:14px">← Araçlar</a>
+  
+  <header>
+    <div class="eyebrow">İntraoperatif · 4-2-1</div>
+    <h1>Ameliyat Sıvı Planı</h1>
+    <div class="sub">Kilo, açlık ve operasyon katsayısını gir; saat saat verilecek sıvıyı gör.</div>
+  </header>
+
+  <div class="card">
+    <div class="field">
+      <label for="kilo">Hasta ağırlığı</label>
+      <div class="in-row"><input id="kilo" type="number" inputmode="decimal" placeholder="0" min="0" step="0.1"><span class="unit">kg</span></div>
+    </div>
+    <div class="field">
+      <label for="aclik">Aç kalınan süre</label>
+      <div class="hint">Hastanın kaç saattir aç ve susuz olduğu</div>
+      <div class="in-row"><input id="aclik" type="number" inputmode="decimal" placeholder="0" min="0" step="1"><span class="unit">saat</span></div>
+    </div>
+    <div class="field">
+      <label for="katsayi">Operasyon katsayısı</label>
+      <div class="hint">Genelde: hafif 2-4 · orta 4-6 · ağır 6-8 (cc/kg/saat)</div>
+      <div class="in-row"><input id="katsayi" type="number" inputmode="decimal" placeholder="0" min="0" step="0.5"><span class="unit">cc/kg/sa</span></div>
+    </div>
+    <div class="field">
+      <label for="sure">Ameliyat süresi</label>
+      <div class="hint">Tablonun kaç saat gösterileceği</div>
+      <div class="in-row"><input id="sure" type="number" inputmode="numeric" placeholder="4" min="1" max="24" step="1" value="4"><span class="unit">saat</span></div>
+    </div>
+  </div>
+
+  <div id="output">
+    <div class="card"><div class="empty">Sonucu görmek için kilo, açlık süresi ve katsayı gir.</div></div>
+  </div>
+
+  <p class="note">
+    <strong>Not:</strong> Bu standart bir başlangıç hesabıdır (4-2-1 idame, açlık açığının ilk 3 saatte
+    1/2–1/4–1/4 replasmanı, operasyon kaybı katsayısı). Kan kaybı, idrar, ateş ve hastanın klinik
+    durumu ayrı değerlendirilir ve hekim ayarlaması gerektirir. Klinik kararın yerine geçmez.
+  </p>
+</div>
+
+<script>
+  const el = id => document.getElementById(id);
+  const inputs = ['kilo','aclik','katsayi','sure'].map(el);
+
+  function idame421(kg){
+    const d1 = Math.min(kg,10)*4;
+    const d2 = Math.min(Math.max(kg-10,0),10)*2;
+    const d3 = Math.max(kg-20,0)*1;
+    return d1+d2+d3;
+  }
+  const fmt = n => Number.isInteger(n) ? n.toString() : n.toFixed(1);
+
+  function hesapla(){
+    const kg = parseFloat(el('kilo').value);
+    const acSaat = parseFloat(el('aclik').value);
+    const kat = parseFloat(el('katsayi').value);
+    let sure = parseInt(el('sure').value);
+    if(isNaN(sure) || sure < 1) sure = 4;
+    if(sure > 24) sure = 24;
+
+    if(isNaN(kg)||kg<=0||isNaN(acSaat)||acSaat<0||isNaN(kat)||kat<0){
+      el('output').innerHTML = '<div class="card"><div class="empty">Sonucu görmek için kilo, açlık süresi ve katsayı gir.</div></div>';
+      return;
+    }
+
+    const idameRate = idame421(kg);          // cc/saat
+    const acikToplam = idameRate * acSaat;    // cc, toplam açlık açığı
+    const opRate = kg * kat;                  // cc/saat
+
+    // saat başına açlık replasmanı
+    function aclikPay(saat){
+      if(saat === 1) return acikToplam/2;
+      if(saat === 2) return acikToplam/4;
+      if(saat === 3) return acikToplam/4;
+      return 0;
+    }
+
+    let rows = '';
+    let tAclik=0, tIdame=0, tOp=0, tGrand=0;
+    for(let s=1; s<=sure; s++){
+      const a = aclikPay(s);
+      const i = idameRate;
+      const o = opRate;
+      const top = a+i+o;
+      tAclik+=a; tIdame+=i; tOp+=o; tGrand+=top;
+      rows += `<tr>
+        <td class="saat">${s}. saat</td>
+        <td class="c-aclik">${fmt(a)}</td>
+        <td class="c-idame">${fmt(i)}</td>
+        <td class="c-op">${fmt(o)}</td>
+        <td class="total">${fmt(top)}</td>
+      </tr>`;
+    }
+
+    // açlık açığı 3 saatte biter; süre 3'ten azsa uyarı
+    let warn = '';
+    if(sure < 3){
+      const kalan = acikToplam - tAclik;
+      if(kalan > 0.5){
+        warn = `<div class="warn">Ameliyat süresi 3 saatten kısa olduğu için açlık açığının
+        <strong>${fmt(kalan)} cc</strong>'lik kısmı bu tabloda verilmedi (normalde 2. ve 3. saatte tamamlanır).</div>`;
+      }
+    }
+
+    el('output').innerHTML = `
+      <div class="summary">
+        <div class="sum-cell aclik"><div class="k">Açlık açığı</div><div class="v">${fmt(acikToplam)}</div><div class="u">cc toplam</div></div>
+        <div class="sum-cell idame"><div class="k">İdame</div><div class="v">${fmt(idameRate)}</div><div class="u">cc/saat</div></div>
+        <div class="sum-cell op"><div class="k">Operasyon</div><div class="v">${fmt(opRate)}</div><div class="u">cc/saat</div></div>
+      </div>
+
+      <div class="card">
+        <div class="table-title">Saat saat plan</div>
+        <div class="legend-mini">
+          <span><i style="background:var(--aclik)"></i>Açlık</span>
+          <span><i style="background:var(--idame)"></i>İdame</span>
+          <span><i style="background:var(--op)"></i>Operasyon</span>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Saat</th><th>Açlık</th><th>İdame</th><th>Op.</th><th>Toplam</th></tr>
+          </thead>
+          <tbody>${rows}</tbody>
+          <tfoot>
+            <tr>
+              <td class="saat">Toplam</td>
+              <td class="c-aclik">${fmt(tAclik)}</td>
+              <td class="c-idame">${fmt(tIdame)}</td>
+              <td class="c-op">${fmt(tOp)}</td>
+              <td>${fmt(tGrand)}</td>
+            </tr>
+          </tfoot>
+        </table>
+        ${warn}
+        <div class="grand">
+          <span class="lbl">${sure} saatte toplam sıvı</span>
+          <span class="val">${fmt(tGrand)} cc</span>
+        </div>
+      </div>
+    `;
+  }
+
+  inputs.forEach(i => i.addEventListener('input', hesapla));
+  hesapla();
+</script>
+</body>
+</html>

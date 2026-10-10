@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pediyatrik MABL Hesap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EEF2F1; --surface:#FFFFFF; --ink:#15302C; --ink-soft:#5A6E6A;
+    --teal:#0E6B63; --teal-bright:#12857A; --line:#DDE5E3; --row-alt:#F6F9F8;
+    --blood:#B0413E;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);
+    min-height:100dvh;display:flex;justify-content:center;padding:20px 14px 40px;-webkit-font-smoothing:antialiased}
+  .app{width:100%;max-width:460px}
+
+  header{margin-bottom:20px}
+  .eyebrow{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--blood);margin-bottom:6px}
+  h1{font-size:25px;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+  .sub{font-size:13px;color:var(--ink-soft);margin-top:6px}
+
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px}
+  .lbl{font-size:13px;font-weight:600;margin-bottom:10px}
+
+  /* dönem seçici (dropdown) */
+  .select-wrap{position:relative}
+  .select-wrap::after{content:"▾";position:absolute;right:16px;top:50%;transform:translateY(-50%);
+    color:var(--ink-soft);font-size:14px;pointer-events:none}
+  #donemSelect{
+    width:100%;appearance:none;-webkit-appearance:none;background:var(--surface);
+    border:1.5px solid var(--line);border-radius:12px;padding:14px 40px 14px 14px;
+    font-family:'Inter',sans-serif;font-size:15px;font-weight:600;color:var(--ink);cursor:pointer;outline:none}
+  #donemSelect:focus{border-color:var(--teal)}
+  #donemSelect:invalid{color:var(--ink-soft);font-weight:500}
+
+  /* cinsiyet */
+  .sex-wrap{display:none;margin-top:10px}
+  .sex-wrap.show{display:block}
+  .seg{display:flex;gap:8px}
+  .seg button{flex:1;border:1.5px solid var(--line);background:var(--surface);border-radius:10px;padding:10px;
+    font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--ink-soft);cursor:pointer}
+  .seg button.sel{border-color:var(--teal);background:#EAF3F1;color:var(--teal)}
+
+  .field{margin-bottom:16px}
+  .field:last-child{margin-bottom:0}
+  .field label{display:block;font-size:13px;font-weight:600;margin-bottom:3px}
+  .field .hint{font-size:11.5px;color:var(--ink-soft);margin-bottom:8px}
+  .in-row{display:flex;align-items:baseline;border-bottom:2px solid var(--line);padding-bottom:4px}
+  .in-row:focus-within{border-color:var(--teal)}
+  .in-row input{flex:1;border:none;outline:none;background:transparent;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:26px;color:var(--ink);padding:0}
+  .in-row input::-webkit-outer-spin-button,.in-row input::-webkit-inner-spin-button{-webkit-appearance:none}
+  .in-row input::placeholder{color:#C4D0CD}
+  .in-row .unit{font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--ink-soft);margin-left:8px}
+
+  .result{background:var(--blood);border-color:var(--blood);color:#fff}
+  .result .big-label{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+  .big-value{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:44px;line-height:1;margin:8px 0 2px;display:flex;align-items:baseline;gap:8px}
+  .big-value .u{font-size:18px;font-weight:500;color:rgba(255,255,255,.75)}
+  .ebv-row{display:flex;justify-content:space-between;margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.2);font-size:13px}
+  .ebv-row .rv{font-family:'IBM Plex Mono',monospace;font-weight:600}
+  .formula{font-size:12px;color:rgba(255,255,255,.7);margin-top:12px;line-height:1.5;font-family:'IBM Plex Mono',monospace}
+
+  .empty{color:var(--ink-soft);font-size:14px;text-align:center;padding:24px 0}
+  .warn{font-size:12.5px;color:var(--blood);background:#F7E9E8;border-radius:10px;padding:11px 13px;margin-top:4px;line-height:1.45}
+  .note{font-size:12px;line-height:1.5;color:var(--ink-soft);padding:0 4px;margin-top:6px}
+  .note strong{color:var(--ink);font-weight:600}
+</style>
+</head>
+<body>
+<div class="app">
+  <a href="../" style="display:inline-block;text-decoration:none;color:var(--ink-soft);font-size:13px;font-weight:600;margin-bottom:14px">← Araçlar</a>
+  
+  <header>
+    <div class="eyebrow">Pediyatrik · MABL</div>
+    <h1>İzin Verilen Maks. Kan Kaybı</h1>
+    <div class="sub">Gelişim dönemi, kilo ve hematokrit değerlerini gir; MABL'ı gör.</div>
+  </header>
+
+  <div class="card">
+    <div class="lbl">Gelişim dönemi</div>
+    <div class="select-wrap">
+      <select id="donemSelect">
+        <option value="" disabled selected>Dönem seçin…</option>
+      </select>
+    </div>
+    <div class="sex-wrap" id="sexWrap">
+      <div class="seg">
+        <button data-sex="erkek">Erkek · 70 ml/kg</button>
+        <button data-sex="kadin">Kadın · 65 ml/kg</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="field">
+      <label for="kilo">Ağırlık</label>
+      <div class="in-row"><input id="kilo" type="number" inputmode="decimal" placeholder="0" min="0" step="0.1"><span class="unit">kg</span></div>
+    </div>
+    <div class="field">
+      <label for="hct0">Başlangıç Hct</label>
+      <div class="in-row"><input id="hct0" type="number" inputmode="decimal" placeholder="0" min="0" step="0.1"><span class="unit">%</span></div>
+    </div>
+    <div class="field">
+      <label for="hctmin">İzin verilen min. Hct</label>
+      <div class="hint">Öneri: 25</div>
+      <div class="in-row"><input id="hctmin" type="number" inputmode="decimal" placeholder="25" min="0" step="0.1" value="25"><span class="unit">%</span></div>
+    </div>
+  </div>
+
+  <div id="output">
+    <div class="card"><div class="empty">Sonucu görmek için dönem, kilo ve Hct değerlerini gir.</div></div>
+  </div>
+
+  <p class="note">
+    <strong>Formül:</strong> MABL = EBV × (başlangıç Hct − hedef min Hct) / başlangıç Hct.
+    EBV, seçilen döneme ait katsayı ile kilonun çarpımıdır. Bu bir hesaplama yardımcısıdır;
+    transfüzyon kararı hastanın klinik durumuna göre hekim tarafından verilir.
+  </p>
+</div>
+
+<script>
+  const el = id => document.getElementById(id);
+
+  const stages = [
+    {id:'prematur', nm:'Prematüre Bebek', sb:'', min:90, max:100},
+    {id:'term',     nm:'Term Yenidoğan',  sb:'0-3 ay', min:80, max:90},
+    {id:'bebek',    nm:'Bebek / Süt Çocuğu', sb:'3 ay - 2 yaş', min:75, max:80},
+    {id:'cocuk',    nm:'Çocuk', sb:'2 - 12 yaş', min:73, max:75},
+    {id:'adolesan', nm:'Adölesan', sb:'ergenlik', sex:true},
+  ];
+
+  let seciliDonem = null;
+  let seciliCinsiyet = null;
+
+  function fmt(n){
+    if(!isFinite(n)) return "-";
+    return (Math.round(n*10)/10).toString();
+  }
+
+  // açılır menüyü doldur
+  const selectEl = el('donemSelect');
+  stages.forEach(s=>{
+    const opt = document.createElement('option');
+    opt.value = s.id;
+    const coef = s.sex ? 'E:70 / K:65 ml/kg' : `${s.min}–${s.max} ml/kg`;
+    opt.textContent = `${s.nm}${s.sb?' ('+s.sb+')':''} · ${coef}`;
+    selectEl.appendChild(opt);
+  });
+
+  selectEl.addEventListener('change', ()=>{
+    seciliDonem = selectEl.value;
+    const s = stages.find(x=>x.id===seciliDonem);
+    el('sexWrap').classList.toggle('show', !!(s && s.sex));
+    if(!(s && s.sex)) seciliCinsiyet = null;
+    hesapla();
+  });
+
+  // cinsiyet seçimi
+  document.querySelectorAll('#sexWrap button').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      seciliCinsiyet = b.dataset.sex;
+      document.querySelectorAll('#sexWrap button').forEach(x=>x.classList.remove('sel'));
+      b.classList.add('sel');
+      hesapla();
+    });
+  });
+
+  function katsayilar(){
+    const s = stages.find(x=>x.id===seciliDonem);
+    if(!s) return null;
+    if(s.sex){
+      if(!seciliCinsiyet) return null;
+      const v = seciliCinsiyet==='erkek' ? 70 : 65;
+      return {min:v, max:v, tekli:true, ad:s.nm+' ('+(seciliCinsiyet==='erkek'?'Erkek':'Kadın')+')'};
+    }
+    return {min:s.min, max:s.max, tekli:(s.min===s.max), ad:s.nm};
+  }
+
+  function hesapla(){
+    const k = katsayilar();
+    const kg = parseFloat(el('kilo').value);
+    const hct0 = parseFloat(el('hct0').value);
+    const hctmin = parseFloat(el('hctmin').value);
+
+    if(!k || isNaN(kg)||kg<=0 || isNaN(hct0)||hct0<=0 || isNaN(hctmin)||hctmin<0){
+      el('output').innerHTML = '<div class="card"><div class="empty">Sonucu görmek için dönem, kilo ve Hct değerlerini gir.</div></div>';
+      return;
+    }
+
+    if(hctmin >= hct0){
+      el('output').innerHTML = `<div class="card"><div class="warn">İzin verilen minimum Hct (${fmt(hctmin)}), başlangıç Hct'den (${fmt(hct0)}) küçük olmalı. Aksi halde izin verilen kan kaybı hesaplanamaz.</div></div>`;
+      return;
+    }
+
+    const oran = (hct0 - hctmin) / hct0;
+    const ebvMin = kg * k.min, ebvMax = kg * k.max;
+    const mablMin = ebvMin * oran, mablMax = ebvMax * oran;
+
+    const ebvStr  = k.tekli ? `${fmt(ebvMin)} ml`  : `${fmt(ebvMin)} – ${fmt(ebvMax)} ml`;
+    const mablStr = k.tekli ? `${fmt(mablMin)}`     : `${fmt(mablMin)} – ${fmt(mablMax)}`;
+
+    el('output').innerHTML = `
+      <div class="card result">
+        <div class="big-label">İzin verilen maks. kan kaybı</div>
+        <div class="big-value"><span>${mablStr}</span><span class="u">ml</span></div>
+        <div class="ebv-row"><span>Tahmini kan hacmi (EBV)</span><span class="rv">${ebvStr}</span></div>
+        <div class="ebv-row"><span>Katsayı (${k.ad})</span><span class="rv">${k.tekli?fmt(k.min):fmt(k.min)+'–'+fmt(k.max)} ml/kg</span></div>
+        <div class="formula">MABL = EBV × (${fmt(hct0)} − ${fmt(hctmin)}) / ${fmt(hct0)}</div>
+      </div>`;
+  }
+</script>
+</body>
+</html>
