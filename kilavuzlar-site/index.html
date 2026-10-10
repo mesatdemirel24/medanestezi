@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kılavuzlar — medanestezi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eaf0f1; --ink:#12353d; --muted:#5a717a; --line:#d4e0e2; --card:#ffffff;
+  --petrol:#0d4b55; --signal:#0a9ca3;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:660px;margin:0 auto;padding:22px 20px 60px}
+.back{display:inline-block;text-decoration:none;color:var(--muted);font-size:14px;font-weight:600;margin-bottom:14px}
+.back:hover{color:var(--signal)}
+h1{font-size:24px;margin:0 0 4px;letter-spacing:-.4px}
+.sub{color:var(--muted);font-size:15px;margin:0 0 6px}
+.tools{margin-top:28px;display:flex;flex-direction:column;gap:12px}
+.tool{display:block;text-decoration:none;color:inherit;background:var(--card);
+  border:1px solid var(--line);border-radius:14px;padding:18px 18px 18px 20px;
+  position:relative;overflow:hidden;transition:border-color .15s,transform .05s}
+.tool::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--signal);
+  transform:scaleY(0);transform-origin:top;transition:transform .18s}
+.tool:hover,.tool:focus-visible{border-color:var(--signal);outline:none}
+.tool:hover::before,.tool:focus-visible::before{transform:scaleY(1)}
+.tool:active{transform:translateY(1px)}
+.tool .t{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.tool h2{font-size:17px;margin:0;font-weight:600}
+.tool .tag{font-size:12px;font-weight:600;color:var(--petrol);background:#e3f0f0;
+  padding:3px 10px;border-radius:20px;flex:0 0 auto}
+.tool p{margin:6px 0 0;color:var(--muted);font-size:14.5px}
+.foot{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;line-height:1.55}
+.foot b{color:var(--ink);font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../">← Araçlar</a>
+  <h1>Kılavuzlar</h1>
+  <p class="sub">Güncel kılavuzların öneri özetleri.</p>
+
+  <nav class="tools">
+    <a class="tool" href="noncardiak-kvh/">
+      <div class="t"><h2>Non-Kardiyak Cerrahi — KVH Yönetimi</h2><span class="tag">2024 AHA/ACC</span></div>
+      <p>Non-kardiyak cerrahide kardiyovasküler hasta yönetimi öneri tabloları — sınıf/kanıt rozetleri, arama ve bölüm menüsü.</p>
+    </a>
+  </nav>
+
+  <p class="foot"><b>Uyarı.</b> Bu sayfalardaki kılavuz özetleri hızlı başvuru içindir; klinik muhakemenin ve kılavuzların tam metninin yerine geçmez.</p>
+</div>
+</body>
+</html>
