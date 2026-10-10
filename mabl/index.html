@@ -72,8 +72,6 @@
 </head>
 <body>
 <div class="app">
-  <a href="../" style="display:inline-block;text-decoration:none;color:var(--ink-soft);font-size:13px;font-weight:600;margin-bottom:14px">← Araçlar</a>
-  
   <header>
     <div class="eyebrow">Pediyatrik · MABL</div>
     <h1>İzin Verilen Maks. Kan Kaybı</h1>
@@ -107,7 +105,7 @@
     <div class="field">
       <label for="hctmin">İzin verilen min. Hct</label>
       <div class="hint">Öneri: 25</div>
-      <div class="in-row"><input id="hctmin" type="number" inputmode="decimal" placeholder="25" min="0" step="0.1" value="25"><span class="unit">%</span></div>
+      <div class="in-row"><input id="hctmin" type="number" inputmode="decimal" placeholder="0" min="0" step="0.1"><span class="unit">%</span></div>
     </div>
   </div>
 
@@ -212,6 +210,9 @@
         <div class="formula">MABL = EBV × (${fmt(hct0)} − ${fmt(hctmin)}) / ${fmt(hct0)}</div>
       </div>`;
   }
+
+  // kilo / Hct kutularına yazıldıkça anında hesapla
+  ['kilo','hct0','hctmin'].forEach(id => el(id).addEventListener('input', hesapla));
 </script>
 </body>
 </html>
