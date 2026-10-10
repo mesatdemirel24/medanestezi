@@ -53,15 +53,17 @@
 
   /* tablo */
   .table-title{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:4px 2px 12px}
-  table{width:100%;border-collapse:collapse;font-size:13.5px}
-  th,td{padding:9px 6px;text-align:right}
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  th,td{padding:9px 4px;text-align:right}
   th:first-child,td:first-child{text-align:left}
-  thead th{font-size:11px;font-weight:600;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.03em;border-bottom:1.5px solid var(--line)}
+  thead th{font-size:10.5px;font-weight:600;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.02em;border-bottom:1.5px solid var(--line)}
   tbody td{font-family:'IBM Plex Mono',monospace;border-bottom:1px solid var(--line)}
   tbody tr:nth-child(even){background:var(--row-alt)}
   td.saat{font-family:'Inter',sans-serif;font-weight:600}
   td.c-aclik{color:var(--aclik)} td.c-idame{color:var(--idame)} td.c-op{color:var(--op)}
   td.total{font-weight:600;color:var(--ink)}
+  td.c-kum{font-weight:600;color:var(--teal)}
+  tfoot td.c-kum{color:var(--teal)}
   tfoot td{font-family:'IBM Plex Mono',monospace;font-weight:600;border-top:2px solid var(--ink);padding-top:11px}
   tfoot td.saat{font-family:'Inter',sans-serif}
   tfoot td.c-aclik{color:var(--aclik)} tfoot td.c-idame{color:var(--idame)} tfoot td.c-op{color:var(--op)}
@@ -80,8 +82,6 @@
 </head>
 <body>
 <div class="app">
-  <a href="../" style="display:inline-block;text-decoration:none;color:var(--ink-soft);font-size:13px;font-weight:600;margin-bottom:14px">← Araçlar</a>
-  
   <header>
     <div class="eyebrow">İntraoperatif · 4-2-1</div>
     <h1>Ameliyat Sıvı Planı</h1>
@@ -160,18 +160,21 @@
 
     let rows = '';
     let tAclik=0, tIdame=0, tOp=0, tGrand=0;
+    let kumulatif=0;
     for(let s=1; s<=sure; s++){
       const a = aclikPay(s);
       const i = idameRate;
       const o = opRate;
       const top = a+i+o;
       tAclik+=a; tIdame+=i; tOp+=o; tGrand+=top;
+      kumulatif += top;                    // o saate kadar biriken toplam
       rows += `<tr>
         <td class="saat">${s}. saat</td>
         <td class="c-aclik">${fmt(a)}</td>
         <td class="c-idame">${fmt(i)}</td>
         <td class="c-op">${fmt(o)}</td>
         <td class="total">${fmt(top)}</td>
+        <td class="c-kum">${fmt(kumulatif)}</td>
       </tr>`;
     }
 
@@ -201,7 +204,7 @@
         </div>
         <table>
           <thead>
-            <tr><th>Saat</th><th>Açlık</th><th>İdame</th><th>Op.</th><th>Toplam</th></tr>
+            <tr><th>Saat</th><th>Açlık</th><th>İdame</th><th>Op.</th><th>Saatlik</th><th>Toplam</th></tr>
           </thead>
           <tbody>${rows}</tbody>
           <tfoot>
@@ -211,6 +214,7 @@
               <td class="c-idame">${fmt(tIdame)}</td>
               <td class="c-op">${fmt(tOp)}</td>
               <td>${fmt(tGrand)}</td>
+              <td class="c-kum">${fmt(tGrand)}</td>
             </tr>
           </tfoot>
         </table>
