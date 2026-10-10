@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YBÜ'de Klinik Nütrisyon (ESPEN 2023) — medanestezi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eaf0f1; --ink:#12353d; --muted:#5a717a; --line:#d4e0e2; --card:#ffffff;
+  --petrol:#0d4b55; --signal:#0a9ca3;
+  --gA:#0f766e; --gB:#2563a8; --g0:#c67a16; --giku:#6b7b82; --gs:#7a5a9e; --ref:#44515a;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,-apple-system,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:22px 18px 70px}
+.back{display:inline-block;text-decoration:none;color:var(--muted);font-size:14px;font-weight:600;margin-bottom:14px}
+.back:hover{color:var(--signal)}
+h1{font-size:23px;margin:0 0 4px;letter-spacing:-.3px;line-height:1.25}
+.cite{color:var(--muted);font-size:13.5px;margin:0 0 18px;line-height:1.5}
+.intro{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:13.5px;color:var(--muted);line-height:1.6;margin-bottom:16px}
+.searchbar{position:sticky;top:0;background:var(--bg);padding:10px 0;z-index:5}
+.searchbar input{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;font-size:16px;background:#fbfdfd;color:var(--ink);font-family:inherit}
+.searchbar input:focus{outline:2px solid rgba(10,156,163,.3);border-color:var(--signal)}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 6px;font-size:12px}
+.legend .bd{cursor:pointer;user-select:none;opacity:.55}
+.legend .bd.on{opacity:1}
+details.toc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:4px 14px;margin:8px 0 18px}
+details.toc summary{cursor:pointer;font-weight:600;font-size:14px;padding:8px 0;color:var(--petrol)}
+details.toc .toclist{display:flex;flex-direction:column;gap:2px;padding:4px 0 10px}
+details.toc a{text-decoration:none;color:var(--ink);font-size:13.5px;padding:3px 0;border-bottom:1px solid #eef3f4}
+details.toc a:hover{color:var(--signal)}
+h2.grp{font-size:14px;text-transform:uppercase;letter-spacing:.5px;color:var(--signal);font-weight:700;margin:32px 0 6px;padding-bottom:6px;border-bottom:2px solid var(--signal);scroll-margin-top:66px}
+.sub{font-size:13.5px;font-weight:700;color:var(--muted);margin:16px 0 2px}
+.rec{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:8px 0;border-left:4px solid var(--line)}
+.rec[data-cls=gA]{border-left-color:var(--gA)} .rec[data-cls=gB]{border-left-color:var(--gB)}
+.rec[data-cls=g0]{border-left-color:var(--g0)} .rec[data-cls=giku]{border-left-color:var(--giku)}
+.rec[data-cls=gs]{border-left-color:var(--gs)}
+.rec p{margin:6px 0 0;font-size:15px}
+.rec .rl{margin:8px 0 0;padding-left:20px}
+.rec .rl li{font-size:14.5px;margin:3px 0}
+.badges{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.bd{font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:20px;color:#fff;white-space:nowrap}
+.bd.gA{background:var(--gA)} .bd.gB{background:var(--gB)} .bd.g0{background:var(--g0)}
+.bd.giku{background:var(--giku)} .bd.gs{background:var(--gs)} .bd.gx{background:#90a0a7}
+.bd.ref{background:var(--ref)}
+.bd.cons{background:#eef3f4;color:var(--muted)}
+.bd.upd{background:#fff3e0;color:#9a5b00}
+.hidden{display:none!important}
+.nores{text-align:center;color:var(--muted);padding:24px 0;font-size:14px}
+.warn{margin-top:26px;background:#fbeceb;border:1px solid #f1cfcd;color:#8f2a26;border-radius:12px;padding:12px 14px;font-size:13px;line-height:1.55}
+.warn b{font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../">← Kılavuzlar</a>
+  <h1>YBÜ'de Klinik Nütrisyon</h1>
+  <p class="cite">ESPEN 2023 — Yoğun bakımda klinik nütrisyon kılavuzu (öneri [R] ve bildirimler [S]).</p>
+
+  <div class="intro">Kısaltmalar: YBÜ = yoğun bakım ünitesi; EN = enteral nütrisyon; PN = parenteral nütrisyon; EH = enerji harcaması; GLN = glutamin; İKU = iyi klinik uygulama noktası; R = öneri; S = bildirim (statement).</div>
+
+  <div class="legend" id="legend">
+    <span class="bd gA on" data-f="gA">Derece A</span>
+    <span class="bd gB on" data-f="gB">Derece B</span>
+    <span class="bd g0 on" data-f="g0">Derece 0</span>
+    <span class="bd giku on" data-f="giku">İKU</span>
+    <span class="bd gs on" data-f="gs">Bildirim</span>
+  </div>
+
+  <div class="searchbar">
+    <input id="q" type="search" placeholder="Ara… (ör. glutamin, erken EN, insülin, obez)">
+  </div>
+
+  <details class="toc">
+    <summary>İçindekiler</summary>
+    <div class="toclist"><a href="#m1">Genel öneriler</a>
+<a href="#m2">Erken tıbbi nütrisyon</a>
+<a href="#m3">Geciktirilmiş tıbbi nütrisyon</a>
+<a href="#m4">Enteral nütrisyon: uygulama yolu</a>
+<a href="#m5">Parenteral nütrisyon</a>
+<a href="#m6">Enerji ve protein hedefleri</a>
+<a href="#m7">Diğer substratlar</a>
+<a href="#m8">Özel durumlarda tıbbi nütrisyon</a>
+<a href="#m9">Tıbbi nütrisyonun izlemi</a></div>
+  </details>
+
+  <div id="content">
+<h2 class="grp" id="m1">Genel öneriler</h2>
+<div class="rec" data-cls="gs" data-txt="bildirim 1: ybü’de 48 saatten uzun kalan her kritik hasta malnütrisyon riski altında kabul edilmelidir. "><div class="badges"><span class="bd ref">S1</span><span class="bd gs">Bildirim</span><span class="bd cons">güçlü uzlaşı · %96</span></div><p>Bildirim 1: YBÜ’de 48 saatten uzun kalan her kritik hasta malnütrisyon riski altında kabul edilmelidir.</p></div>
+<div class="rec" data-cls="giku" data-txt="ybü’de yatan, özellikle 48 saatten uzun kalan tüm hastalar için tıbbi nütrisyon tedavisi düşünülmelidir. "><div class="badges"><span class="bd ref">R1</span><span class="bd giku">Derece İKU</span><span class="bd cons">güçlü uzlaşı · %100</span></div><p>YBÜ’de yatan, özellikle 48 saatten uzun kalan tüm hastalar için tıbbi nütrisyon tedavisi düşünülmelidir.</p></div>
+<div class="rec" data-cls="giku" data-txt="yemek yiyebilen kritik hastalarda oral beslenme, en veya pn’ye tercih edilmelidir. "><div class="badges"><span class="bd ref">R3</span><span class="bd giku">Derece İKU</span><span class="bd cons">güçlü uzlaşı · %100</span></div><p>Yemek yiyebilen kritik hastalarda oral beslenme, EN veya PN’ye tercih edilmelidir.</p></div>
+<div class="rec" data-cls="giku" data-txt="özgül bir araç doğrulanana kadar, ybü’de malnütrisyonu değerlendirmek için genel bir klinik değerlendirme yapılmalıdır. açıklama: genel klinik değerlendirme; anamnezi, ybü’ye yatış öncesinde istemsiz kilo kaybı veya fiziksel performansta azalma bildirimini, fizik muayeneyi, vücut bileşiminin genel değerlendirmesini ve mümkünse kas kütlesi ile kas gücünü içerebilir."><div class="badges"><span class="bd ref">R2</span><span class="bd giku">Derece İKU</span><span class="bd cons">güçlü uzlaşı · %100</span></div><p>Özgül bir araç doğrulanana kadar, YBÜ’de malnütrisyonu değerlendirmek için genel bir klinik değerlendirme yapılmalıdır.</p><ul class="rl"><li>Açıklama: Genel klinik değerlendirme; anamnezi, YBÜ’ye yatış öncesinde istemsiz kilo kaybı veya fiziksel performansta azalma bildirimini, fizik muayeneyi, vücut bileşiminin genel değerlendirmesini ve mümkünse kas kütlesi ile kas gücünü içerebilir.</li></ul></div>
+<div class="rec" data-cls="gA" data-txt="aşırı beslenmeden kaçınmak için kritik hastalarda erken dönemde tam doz en ve pn kullanılmamalı, tam doza üç ila yedi gün içinde ulaşılacak şekilde reçete edilmelidir. "><div class="badges"><span class="bd ref">R8</span><span class="bd gA">Derece A</span><span class="bd cons">güçlü uzlaşı · %100</span></div><p>Aşırı beslenmeden kaçınmak için kritik hastalarda erken dönemde tam doz EN ve PN kullanılmamalı, tam doza üç ila yedi gün içinde ulaşılacak şekilde reçete edilmelidir.</p></div>
+<h2 class="grp" id="m2">Erken tıbbi nütrisyon</h2>
+<div class="rec" data-cls="gB" data-txt="oral alım mümkün değilse, kritik erişkin hastalarda en’yi geciktirmek yerine erken en (48 saat içinde) uygulanmalı/başlanmalıdır. "><div class="badges"><span class="bd ref">R4</span><span class="bd gB">Derece B</span><span class="bd cons">güçlü uzlaşı · %100</span></div><p>Oral alım mümkün değilse, kritik erişkin hastalarda EN’yi geciktirmek yerine erken EN (48 saat içinde) uygulanmalı/başlanmalıdır.</p></div>
+<div class="rec" data-cls="gA" data-txt="oral alım mümkün değilse, kritik erişkin hastalarda erken pn yerine erken en (48 saat içinde) uygulanmalı/başlanmalıdır. "><div class="badges"><span class="bd ref">R5</span><span class="bd gA">Derece A</span><span class="bd cons">güçlü uzlaşı · %100</span></div><p>Oral alım mümkün değilse, kritik erişkin hastalarda erken PN yerine erken EN (48 saat içinde) uygulanmalı/başlanmalıdır.</p></div>
+<div class="rec" data-cls="gB" data-txt="erken en şu durumlarda uygulanmalıdır: ekstrakorporeal membran oksijenasyonu (ecmo) uygulanan hastalarda travmatik beyin hasarı olan hastalarda inmeli (iskemik veya hemorajik) hastalarda omurilik yaralanması olan hastalarda ağır akut pankreatitli hastalarda gastrointestinal cerrahi sonrası hastalarda abdominal aort cerrahisi sonrası hastalarda gastrointestinal kanalın devamlılığı doğrulanmış/yeniden sağlanmış abdominal travmalı hastalarda nöromüsküler bloker ajan alan hastalarda yüzüstü (pron) pozisyonda izlenen hastalarda açık karınlı hastalarda bağırsak iskemisi veya obstrüksiyonundan şüphelenilmediği sürece, bağırsak seslerinin varlığından bağımsız olarak ishali olan hastalarda"><div class="badges"><span class="bd ref">R38</span><span class="bd gB">Derece B</span><span class="bd cons">güçlü uzlaşı · %100</span></div><p>Erken EN şu durumlarda uygulanmalıdır:</p><ul class="rl"><li>ekstrakorporeal membran oksijenasyonu (ECMO) uygulanan hastalarda</li><li>travmatik beyin hasarı olan hastalarda</li><li>inmeli (iskemik veya hemorajik) hastalarda</li><li>omurilik yaralanması olan hastalarda</li><li>ağır akut pankreatitli hastalarda</li><li>gastrointestinal cerrahi sonrası hastalarda</li><li>abdominal aort cerrahisi sonrası hastalarda</li><li>gastrointestinal kanalın devamlılığı doğrulanmış/yeniden sağlanmış abdominal travmalı hastalarda</li><li>nöromüsküler bloker ajan alan hastalarda</li><li>yüzüstü (pron) pozisyonda izlenen hastalarda</li><li>açık karınlı hastalarda</li><li>bağırsak iskemisi veya obstrüksiyonundan şüphelenilmediği sürece, bağırsak seslerinin varlığından bağımsız olarak</li><li>ishali olan hastalarda</li></ul></div>
+<div class="rec" data-cls="g0" data-txt="ağır malnütrisyonlu hastalarda en kontrendike ise, hiç beslememek yerine erken ve kademeli pn verilebilir. "><div class="badges"><span class="bd ref">R7</span><span class="bd g0">Derece 0</span><span class="bd cons">güçlü uzlaşı · %95</span></div><p>Ağır malnütrisyonlu hastalarda EN kontrendike ise, hiç beslememek yerine erken ve kademeli PN verilebilir.</p></div>
+<div class="rec" data-cls="giku" data-txt="ybü’deki ilk hafta içinde tam doz en’yi tolere edemeyen hastalarda, pn başlamanın güvenliği ve yararları olgu bazında tartılmalıdır. "><div class="badges"><span class="bd ref">R20</span><span class="bd giku">Derece İKU</span><span class="bd cons">güçlü uzlaşı · %96</span></div><p>YBÜ’deki ilk hafta içinde tam doz EN’yi tolere edemeyen hastalarda, PN başlamanın güvenliği ve yararları olgu bazında tartılmalıdır.</p></div>
+<h2 class="grp" id="m3">Geciktirilmiş tıbbi nütrisyon</h2>
+<div class="rec" data-cls="gB" data-txt="en şu durumlarda geciktirilmelidir: şok kontrol altında değilse ve hemodinamik ile doku perfüzyon hedeflerine ulaşılamamışsa; şok sıvılar ve vazopresör/inotroplarla kontrol altına alınır alınmaz, bağırsak iskemisi bulguları açısından dikkatli olunarak düşük doz en başlanabilir; kontrol altına alınamayan, yaşamı tehdit eden hipoksemi, hiperkapni veya asidoz varlığında; stabil hipoksemisi ve kompanse ya da permisif hiperkapni ve asidozu olan hastalarda en başlanabilir; aktif üst gastrointestinal kanaması olan hastalarda; kanama durduğunda ve yeniden kanama bulgusu gözlenmediğinde en başlanabilir; belirgin bağırsak iskemisi olan hastalarda; yüksek debili bağırsak fistülü olan hastalarda, fistülün distaline güvenilir beslenme erişimi sağlanamıyorsa; abdominal kompartman sendromu olan hastalarda; gastrik aspirat hacmi 500 ml/6 saatin üzerindeyse."><div class="badges"><span class="bd ref">R39</span><span class="bd gB">Derece B</span><span class="bd cons">güçlü uzlaşı · %96</span></div><p>EN şu durumlarda geciktirilmelidir:</p><ul class="rl"><li>şok kontrol altında değilse ve hemodinamik ile doku perfüzyon hedeflerine ulaşılamamışsa; şok sıvılar ve vazopresör/inotroplarla kontrol altına alınır alınmaz, bağırsak iskemisi bulguları açısından dikkatli olunarak düşük doz EN başlanabilir;</li><li>kontrol altına alınamayan, yaşamı tehdit eden hipoksemi, hiperkapni veya asidoz varlığında; stabil hipoksemisi ve kompanse ya da permisif hiperkapni ve asidozu olan hastalarda EN başlanabilir;</li><li>aktif üst gastrointestinal kanaması olan hastalarda; kanama durduğunda ve yeniden kanama bulgusu gözlenmediğinde EN başlanabilir;</li><li>belirgin bağırsak iskemisi olan hastalarda;</li><li>yüksek debili bağırsak fistülü olan hastalarda, fistülün distaline güvenilir beslenme erişimi sağlanamıyorsa;</li><li>abdominal kompartman sendromu olan hastalarda;</li><li>gastrik aspirat hacmi 500 mL/6 saatin üzerindeyse.</li></ul></div>
+<div class="rec" data-cls="gB" data-txt="düşük doz en şu durumlarda uygulanmalıdır: terapötik hipotermi uygulanan hastalarda; doz yeniden ısıtma sonrasında artırılır; abdominal kompartman sendromu olmaksızın intraabdominal hipertansiyonu olan hastalarda; en altında intraabdominal basınç değerleri daha da yükselirse en’nin geçici olarak azaltılması veya kesilmesi düşünülmelidir; akut karaciğer yetersizliği olan hastalarda, akut ve yaşamı hemen tehdit eden metabolik bozukluklar karaciğer destek stratejileriyle veya bunlar olmaksızın kontrol altına alındığında, ensefalopati derecesinden bağımsız olarak."><div class="badges"><span class="bd ref">R40</span><span class="bd gB">Derece B</span><span class="bd cons">güçlü uzlaşı · %96</span></div><p>Düşük doz EN şu durumlarda uygulanmalıdır:</p><ul class="rl"><li>terapötik hipotermi uygulanan hastalarda; doz yeniden ısıtma sonrasında artırılır;</li><li>abdominal kompartman sendromu olmaksızın intraabdominal hipertansiyonu olan hastalarda; EN altında intraabdominal basınç değerleri daha da yükselirse EN’nin geçici olarak azaltılması veya kesilmesi düşünülmelidir;</li><li>akut karaciğer yetersizliği olan hastalarda, akut ve yaşamı hemen tehdit eden metabolik bozukluklar karaciğer destek stratejileriyle veya bunlar olmaksızın kontrol altına alındığında, ensefalopati derecesinden bağımsız olarak.</li></ul></div>
+<h2 class="grp" id="m4">Enteral nütrisyon: uygulama yolu</h2>
+<div class="rec" data-cls="giku" data-txt="aspirasyon riski yüksek kabul edilen hastalarda postpilorik, özellikle jejunal beslenme uygulanabilir. "><div class="badges"><span class="bd ref">R12</span><span class="bd giku">Derece İKU</span><span class="bd cons">güçlü uzlaşı · %95</span></div><p>Aspirasyon riski yüksek kabul edilen hastalarda postpilorik, özellikle jejunal beslenme uygulanabilir.</p></div>
+<div class="rec" data-cls="gB" data-txt="en bolus yerine sürekli (kontinü) olarak verilmelidir. "><div class="badges"><span class="bd ref">R9</span><span class="bd gB">Derece B</span><span class="bd cons">güçlü uzlaşı · %95</span></div><p>EN bolus yerine sürekli (kontinü) olarak verilmelidir.</p></div>
+<div class="rec" data-cls="giku" data-txt="en’ye başlamak için standart yaklaşım olarak gastrik erişim kullanılmalıdır. "><div class="badges"><span class="bd ref">R10</span><span class="bd giku">Derece İKU</span><span class="bd cons">güçlü uzlaşı · %100</span></div><p>EN’ye başlamak için standart yaklaşım olarak gastrik erişim kullanılmalıdır.</p></div>
+<div class="rec" data-cls="gB" data-txt="prokinetik ajanlarla düzelmeyen gastrik beslenme intoleransı olan hastalarda postpilorik beslenme kullanılmalıdır. "><div class="badges"><span class="bd ref">R11</span><span class="bd gB">Derece B</span><span class="bd cons">güçlü uzlaşı · %100</span></div><p>Prokinetik ajanlarla düzelmeyen gastrik beslenme intoleransı olan hastalarda postpilorik beslenme kullanılmalıdır.</p></div>
+<h2 class="grp" id="m5">Parenteral nütrisyon</h2>
+<div class="rec" data-cls="gB" data-txt="oral beslenme ve en kontrendike ise, pn üç ila yedi gün içinde başlanmalıdır. "><div class="badges"><span class="bd ref">R6</span><span class="bd gB">Derece B</span><span class="bd cons">uzlaşı · %89</span></div><p>Oral beslenme ve EN kontrendike ise, PN üç ila yedi gün içinde başlanmalıdır.</p></div>
+<div class="rec" data-cls="giku" data-txt="en toleransını artırmaya yönelik tüm makul stratejiler denenmeden pn başlanmamalıdır. "><div class="badges"><span class="bd ref">R21</span><span class="bd giku">Derece İKU</span><span class="bd cons">uzlaşı · %100</span><span class="bd upd">güncellenmiş</span></div><p>EN toleransını artırmaya yönelik tüm makul stratejiler denenmeden PN başlanmamalıdır.</p></div>
+<h2 class="grp" id="m6">Enerji ve protein hedefleri</h2>
+<div class="rec" data-cls="gB" data-txt="mekanik ventilasyon uygulanan kritik hastalarda enerji harcaması (eh) indirekt kalorimetri ile belirlenmelidir. "><div class="badges"><span class="bd ref">R15</span><span class="bd gB">Derece B</span><span class="bd cons">güçlü uzlaşı · %95</span></div><p>Mekanik ventilasyon uygulanan kritik hastalarda enerji harcaması (EH) indirekt kalorimetri ile belirlenmelidir.</p></div>
+<div class="rec" data-cls="g0" data-txt="i̇ndirekt kalorimetri kullanılıyorsa, akut hastalığın erken evresinden sonra hipokalorik yerine izokalorik nütrisyona kademeli olarak geçilebilir. "><div class="badges"><span class="bd ref">R16</span><span class="bd g0">Derece 0</span><span class="bd cons">güçlü uzlaşı · %95</span></div><p>İndirekt kalorimetri kullanılıyorsa, akut hastalığın erken evresinden sonra hipokalorik yerine izokalorik nütrisyona kademeli olarak geçilebilir.</p></div>
+<div class="rec" data-cls="gs" data-txt="bildirim: kalorimetri mevcut değilse, pulmoner arter kateterinden elde edilen vo2 (oksijen tüketimi) veya ventilatörden elde edilen vco2 (karbondioksit üretimi), eh’yi tahmin denklemlerinden daha iyi değerlendirir. "><div class="badges"><span class="bd ref">S2</span><span class="bd gs">Bildirim</span><span class="bd cons">uzlaşı · %82</span></div><p>Bildirim: Kalorimetri mevcut değilse, pulmoner arter kateterinden elde edilen VO2 (oksijen tüketimi) veya ventilatörden elde edilen VCO2 (karbondioksit üretimi), EH’yi tahmin denklemlerinden daha iyi değerlendirir.</p></div>
+<div class="rec" data-cls="gB" data-txt="enerji gereksinimini tahmin etmek için tahmin denklemleri kullanılıyorsa, ybü yatışının ilk haftasında izokalorik nütrisyon yerine hipokalorik nütrisyon (tahmini gereksinimin %70&#x27;inin altında) tercih edilmelidir. "><div class="badges"><span class="bd ref">R19</span><span class="bd gB">Derece B</span><span class="bd cons">güçlü uzlaşı · %95</span></div><p>Enerji gereksinimini tahmin etmek için tahmin denklemleri kullanılıyorsa, YBÜ yatışının ilk haftasında izokalorik nütrisyon yerine hipokalorik nütrisyon (tahmini gereksinimin %70&#x27;inin altında) tercih edilmelidir.</p></div>
+<div class="rec" data-cls="gB" data-txt="akut hastalığın erken evresinde hipokalorik nütrisyon (eh’nin %70&#x27;ini aşmayacak şekilde) uygulanmalıdır. "><div class="badges"><span class="bd ref">R17</span><span class="bd gB">Derece B</span><span class="bd cons">güçlü uzlaşı · %100</span></div><p>Akut hastalığın erken evresinde hipokalorik nütrisyon (EH’nin %70&#x27;ini aşmayacak şekilde) uygulanmalıdır.</p></div>
+<div class="rec" data-cls="g0" data-txt="üçüncü günden sonra enerji desteği, ölçülen eh’nin %80-100&#x27;üne kadar artırılabilir. "><div class="badges"><span class="bd ref">R18</span><span class="bd g0">Derece 0</span><span class="bd cons">güçlü uzlaşı · %95</span></div><p>Üçüncü günden sonra enerji desteği, ölçülen EH’nin %80-100&#x27;üne kadar artırılabilir.</p></div>
+<div class="rec" data-cls="g0" data-txt="kritik hastalık sırasında günde 1,3 g/kg protein eşdeğeri kademeli olarak verilebilir. "><div class="badges"><span class="bd ref">R22</span><span class="bd g0">Derece 0</span><span class="bd cons">güçlü uzlaşı · %92</span><span class="bd upd">güncellenmiş</span></div><p>Kritik hastalık sırasında günde 1,3 g/kg protein eşdeğeri kademeli olarak verilebilir.</p></div>
+<div class="rec" data-cls="gs" data-txt="bildirim 3: fiziksel aktivite, nütrisyon tedavisinin yararlı etkilerini artırabilir. "><div class="badges"><span class="bd ref">S3</span><span class="bd gs">Bildirim</span><span class="bd cons">uzlaşı · %86</span></div><p>Bildirim 3: Fiziksel aktivite, nütrisyon tedavisinin yararlı etkilerini artırabilir.</p></div>
+<h2 class="grp" id="m7">Diğer substratlar</h2>
+<div class="rec" data-cls="giku" data-txt="ybü hastalarına verilen glukoz (pn) veya karbonhidrat (en) miktarı 5 mg/kg/dk’yı aşmamalıdır. "><div class="badges"><span class="bd ref">R23</span><span class="bd giku">Derece İKU</span><span class="bd cons">güçlü uzlaşı · %100</span></div><p>YBÜ hastalarına verilen glukoz (PN) veya karbonhidrat (EN) miktarı 5 mg/kg/dk’yı aşmamalıdır.</p></div>
+<div class="rec" data-cls="giku" data-txt="i̇ntravenöz lipid emülsiyonlarının uygulanması genel olarak pn’nin bir parçası olmalıdır. "><div class="badges"><span class="bd ref">R24</span><span class="bd giku">Derece İKU</span><span class="bd cons">güçlü uzlaşı · %100</span></div><p>İntravenöz lipid emülsiyonlarının uygulanması genel olarak PN’nin bir parçası olmalıdır.</p></div>
+<div class="rec" data-cls="giku" data-txt="i̇ntravenöz lipid (nütrisyonel olmayan lipid kaynakları dahil) 1,5 g lipid/kg/gün’ü aşmamalı ve bireysel toleransa göre ayarlanmalıdır. "><div class="badges"><span class="bd ref">R25</span><span class="bd giku">Derece İKU</span><span class="bd cons">güçlü uzlaşı · %100</span></div><p>İntravenöz lipid (nütrisyonel olmayan lipid kaynakları dahil) 1,5 g lipid/kg/gün’ü aşmamalı ve bireysel toleransa göre ayarlanmalıdır.</p></div>
+<div class="rec" data-cls="gB" data-txt="vücut yüzey alanının %20&#x27;sinden fazlası yanık olan hastalarda, en başlanır başlanmaz 10-15 gün süreyle ek enteral glutamin (gln) dozları (0,3-0,5 g/kg/gün) verilmelidir. "><div class="badges"><span class="bd ref">R26</span><span class="bd gB">Derece B</span><span class="bd cons">güçlü uzlaşı · %95</span></div><p>Vücut yüzey alanının %20&#x27;sinden fazlası yanık olan hastalarda, EN başlanır başlanmaz 10-15 gün süreyle ek enteral glutamin (GLN) dozları (0,3-0,5 g/kg/gün) verilmelidir.</p></div>
+<div class="rec" data-cls="g0" data-txt="kritik travma hastalarında, en ile birlikte ilk beş gün ek enteral gln dozları (0,2-0,3 g/kg/gün) verilebilir. komplike yara iyileşmesi durumunda 10-15 günlük daha uzun bir süre verilebilir. "><div class="badges"><span class="bd ref">R27</span><span class="bd g0">Derece 0</span><span class="bd cons">güçlü uzlaşı · %91</span></div><p>Kritik travma hastalarında, EN ile birlikte ilk beş gün ek enteral GLN dozları (0,2-0,3 g/kg/gün) verilebilir. Komplike yara iyileşmesi durumunda 10-15 günlük daha uzun bir süre verilebilir.</p></div>
+<div class="rec" data-cls="gB" data-txt="yanık ve travma hastaları dışındaki ybü hastalarında ek enteral gln verilmemelidir. "><div class="badges"><span class="bd ref">R28</span><span class="bd gB">Derece B</span><span class="bd cons">güçlü uzlaşı · %92</span></div><p>Yanık ve travma hastaları dışındaki YBÜ hastalarında ek enteral GLN verilmemelidir.</p></div>
+<div class="rec" data-cls="gA" data-txt="stabil olmayan ve karmaşık ybü hastalarında, özellikle karaciğer ve böbrek yetersizliği olanlarda, parenteral gln-dipeptid verilmemelidir. "><div class="badges"><span class="bd ref">R29</span><span class="bd gA">Derece A</span><span class="bd cons">güçlü uzlaşı · %92</span></div><p>Stabil olmayan ve karmaşık YBÜ hastalarında, özellikle karaciğer ve böbrek yetersizliği olanlarda, parenteral GLN-dipeptid verilmemelidir.</p></div>
+<div class="rec" data-cls="gB" data-txt="yüksek doz omega-3 ile zenginleştirilmiş en formülü bolus şeklinde verilmemelidir. "><div class="badges"><span class="bd ref">R30</span><span class="bd gB">Derece B</span><span class="bd cons">güçlü uzlaşı · %91</span></div><p>Yüksek doz omega-3 ile zenginleştirilmiş EN formülü bolus şeklinde verilmemelidir.</p></div>
+<div class="rec" data-cls="g0" data-txt="nütrisyonel dozlar içinde omega-3 yağ asitleriyle zenginleştirilmiş en verilebilir. "><div class="badges"><span class="bd ref">R31</span><span class="bd g0">Derece 0</span><span class="bd cons">güçlü uzlaşı · %95</span></div><p>Nütrisyonel dozlar içinde omega-3 yağ asitleriyle zenginleştirilmiş EN verilebilir.</p></div>
+<div class="rec" data-cls="gB" data-txt="yüksek doz omega-3 ile zenginleştirilmiş enteral formüller rutin olarak verilmemelidir. "><div class="badges"><span class="bd ref">R32</span><span class="bd gB">Derece B</span><span class="bd cons">uzlaşı · %90</span></div><p>Yüksek doz omega-3 ile zenginleştirilmiş enteral formüller rutin olarak verilmemelidir.</p></div>
+<div class="rec" data-cls="g0" data-txt="pn alan hastalarda epa + dha ile zenginleştirilmiş parenteral lipid emülsiyonları (balık yağı dozu 0,1-0,2 g/kg/gün) verilebilir. "><div class="badges"><span class="bd ref">R33</span><span class="bd g0">Derece 0</span><span class="bd cons">güçlü uzlaşı · %100</span><span class="bd upd">güncellenmiş</span></div><p>PN alan hastalarda EPA + DHA ile zenginleştirilmiş parenteral lipid emülsiyonları (balık yağı dozu 0,1-0,2 g/kg/gün) verilebilir.</p></div>
+<div class="rec" data-cls="gB" data-txt="substrat metabolizmasını mümkün kılmak için mikrobesinler (yani eser elementler ve vitaminler) pn ile birlikte günlük olarak verilmelidir. "><div class="badges"><span class="bd ref">R34</span><span class="bd gB">Derece B</span><span class="bd cons">güçlü uzlaşı · %100</span></div><p>Substrat metabolizmasını mümkün kılmak için mikrobesinler (yani eser elementler ve vitaminler) PN ile birlikte günlük olarak verilmelidir.</p></div>
+<div class="rec" data-cls="gA" data-txt="antioksidanlar, kanıtlanmış eksiklik olmaksızın yüksek doz monoterapi veya kombinasyon tedavisi olarak verilmemelidir. "><div class="badges"><span class="bd ref">R35</span><span class="bd gA">Derece A</span><span class="bd cons">güçlü uzlaşı · %100</span><span class="bd upd">güncellenmiş</span></div><p>Antioksidanlar, kanıtlanmış eksiklik olmaksızın yüksek doz monoterapi veya kombinasyon tedavisi olarak verilmemelidir.</p></div>
+<div class="rec" data-cls="giku" data-txt="d vitamini (25(oh)d) düzeyi, d vitamini tükenmesi veya eksikliği riski taşıdığı düşünülen tüm hastalarda belirlenebilir. "><div class="badges"><span class="bd ref">R36</span><span class="bd giku">Derece İKU</span><span class="bd cons">güçlü uzlaşı · %100</span><span class="bd upd">güncellenmiş</span></div><p>D vitamini (25(OH)D) düzeyi, D vitamini tükenmesi veya eksikliği riski taşıdığı düşünülen tüm hastalarda belirlenebilir.</p></div>
+<h2 class="grp" id="m8">Özel durumlarda tıbbi nütrisyon</h2>
+<div class="sub">Entübe olmayan hasta</div>
+<div class="rec" data-cls="giku" data-txt="oral beslenmeyle enerji hedefine ulaşamayan entübe olmayan hastalarda önce oral nütrisyon destek ürünleri, ardından en düşünülmelidir. "><div class="badges"><span class="bd ref">R41</span><span class="bd giku">Derece İKU</span><span class="bd cons">güçlü uzlaşı · %96</span></div><p>Oral beslenmeyle enerji hedefine ulaşamayan entübe olmayan hastalarda önce oral nütrisyon destek ürünleri, ardından EN düşünülmelidir.</p></div>
+<div class="rec" data-cls="giku" data-txt="disfajisi olan entübe olmayan hastalarda kıvamı uyarlanmış besinler düşünülebilir. yutmanın güvenli olmadığı kanıtlanırsa en uygulanmalıdır. "><div class="badges"><span class="bd ref">R42</span><span class="bd giku">Derece İKU</span><span class="bd cons">güçlü uzlaşı · %94</span></div><p>Disfajisi olan entübe olmayan hastalarda kıvamı uyarlanmış besinler düşünülebilir. Yutmanın güvenli olmadığı kanıtlanırsa EN uygulanmalıdır.</p></div>
+<div class="rec" data-cls="giku" data-txt="disfajisi ve çok yüksek aspirasyon riski olan entübe olmayan hastalarda postpilorik en veya bu mümkün değilse, nazoenteral tüp çıkarılarak yapılan yutma eğitimi sırasında geçici pn uygulanabilir. "><div class="badges"><span class="bd ref">R43</span><span class="bd giku">Derece İKU</span><span class="bd cons">güçlü uzlaşı · %92</span></div><p>Disfajisi ve çok yüksek aspirasyon riski olan entübe olmayan hastalarda postpilorik EN veya bu mümkün değilse, nazoenteral tüp çıkarılarak yapılan yutma eğitimi sırasında geçici PN uygulanabilir.</p></div>
+<div class="sub">Cerrahi hasta</div>
+<div class="rec" data-cls="g0" data-txt="abdominal veya özofagus cerrahisi sonrası hastalarda erken en, geciktirilmiş en’ye tercih edilebilir. "><div class="badges"><span class="bd ref">R45</span><span class="bd g0">Derece 0</span><span class="bd cons">güçlü uzlaşı · %96</span></div><p>Abdominal veya özofagus cerrahisi sonrası hastalarda erken EN, geciktirilmiş EN’ye tercih edilebilir.</p></div>
+<div class="rec" data-cls="giku" data-txt="abdominal veya özofagus cerrahisi sonrası cerrahi komplikasyon gelişen ve ağızdan beslenemeyen kritik hastalarda, gastrointestinal kanalda devamsızlık veya obstrüksiyon ya da abdominal kompartman sendromu yoksa (pn yerine) en tercih edilmelidir. "><div class="badges"><span class="bd ref">R46</span><span class="bd giku">Derece İKU</span><span class="bd cons">güçlü uzlaşı · %96</span></div><p>Abdominal veya özofagus cerrahisi sonrası cerrahi komplikasyon gelişen ve ağızdan beslenemeyen kritik hastalarda, gastrointestinal kanalda devamsızlık veya obstrüksiyon ya da abdominal kompartman sendromu yoksa (PN yerine) EN tercih edilmelidir.</p></div>
+<div class="rec" data-cls="giku" data-txt="onarılmamış anastomoz kaçağı, iç veya dış fistül varlığında, en uygulamak için defektin distaline beslenme erişimi sağlanması hedeflenmelidir. "><div class="badges"><span class="bd ref">R47</span><span class="bd giku">Derece İKU</span><span class="bd cons">güçlü uzlaşı · %96</span></div><p>Onarılmamış anastomoz kaçağı, iç veya dış fistül varlığında, EN uygulamak için defektin distaline beslenme erişimi sağlanması hedeflenmelidir.</p></div>
+<div class="rec" data-cls="giku" data-txt="onarılmamış anastomoz kaçağı, iç veya dış fistül varlığında ya da distal beslenme erişimi sağlanamıyorsa en verilmemeli ve pn başlanabilir. "><div class="badges"><span class="bd ref">R48</span><span class="bd giku">Derece İKU</span><span class="bd cons">güçlü uzlaşı · %100</span></div><p>Onarılmamış anastomoz kaçağı, iç veya dış fistül varlığında ya da distal beslenme erişimi sağlanamıyorsa EN verilmemeli ve PN başlanabilir.</p></div>
+<div class="rec" data-cls="giku" data-txt="yüksek debili stoma veya fistül varlığında, kimus reinfüzyonu veya enteroklizin uygunluğu değerlendirilmeli ve uygunsa yapılmalıdır. "><div class="badges"><span class="bd ref">R49</span><span class="bd giku">Derece İKU</span><span class="bd cons">güçlü uzlaşı · %100</span></div><p>Yüksek debili stoma veya fistül varlığında, kimus reinfüzyonu veya enteroklizin uygunluğu değerlendirilmeli ve uygunsa yapılmalıdır.</p></div>
+<div class="sub">Travma hastası</div>
+<div class="rec" data-cls="gB" data-txt="travma hastalarına tercihen erken pn yerine erken en verilmelidir. "><div class="badges"><span class="bd ref">R50</span><span class="bd gB">Derece B</span><span class="bd cons">güçlü uzlaşı · %96</span></div><p>Travma hastalarına tercihen erken PN yerine erken EN verilmelidir.</p></div>
+<div class="sub">Septik hasta</div>
+<div class="rec" data-cls="giku" data-txt="septik hastalarda hemodinamik stabilizasyondan sonra erken ve kademeli en kullanılmalıdır. kontrendike ise en’nin yerine kademeli pn verilmeli veya en kademeli pn ile desteklenmelidir. "><div class="badges"><span class="bd ref">R44</span><span class="bd giku">Derece İKU</span><span class="bd cons">güçlü uzlaşı · %94</span></div><p>Septik hastalarda hemodinamik stabilizasyondan sonra erken ve kademeli EN kullanılmalıdır. Kontrendike ise EN’nin yerine kademeli PN verilmeli veya EN kademeli PN ile desteklenmelidir.</p></div>
+<div class="sub">Obez hasta</div>
+<div class="rec" data-cls="g0" data-txt="obez hastalara, tercihen indirekt kalorimetri ölçümleri ve idrarla azot kayıpları rehberliğinde, izokalorik yüksek proteinli bir diyet verilebilir. "><div class="badges"><span class="bd ref">R51</span><span class="bd g0">Derece 0</span><span class="bd cons">uzlaşı · %89</span></div><p>Obez hastalara, tercihen indirekt kalorimetri ölçümleri ve idrarla azot kayıpları rehberliğinde, izokalorik yüksek proteinli bir diyet verilebilir.</p></div>
+<div class="rec" data-cls="giku" data-txt="obez hastalarda enerji alımı indirekt kalorimetri ile yönlendirilmelidir. protein desteği, idrarla azot kayıpları veya yağsız vücut kütlesinin belirlenmesi (bilgisayarlı tomografi veya başka araçlarla) ile yönlendirilmelidir. i̇ndirekt kalorimetri mevcut değilse, enerji alımı “düzeltilmiş vücut ağırlığına” göre belirlenebilir. i̇drarla azot kayıpları veya yağsız vücut kütlesi ölçümü mevcut değilse, protein alımı 1,3 g/kg “düzeltilmiş vücut ağırlığı”/gün olabilir."><div class="badges"><span class="bd ref">R52</span><span class="bd giku">Derece İKU</span><span class="bd cons">uzlaşı · %89</span></div><p>Obez hastalarda enerji alımı indirekt kalorimetri ile yönlendirilmelidir.</p><ul class="rl"><li>Protein desteği, idrarla azot kayıpları veya yağsız vücut kütlesinin belirlenmesi (bilgisayarlı tomografi veya başka araçlarla) ile yönlendirilmelidir.</li><li>İndirekt kalorimetri mevcut değilse, enerji alımı “düzeltilmiş vücut ağırlığına” göre belirlenebilir.</li><li>İdrarla azot kayıpları veya yağsız vücut kütlesi ölçümü mevcut değilse, protein alımı 1,3 g/kg “düzeltilmiş vücut ağırlığı”/gün olabilir.</li></ul></div>
+<h2 class="grp" id="m9">Tıbbi nütrisyonun izlemi</h2>
+<div class="rec" data-cls="giku" data-txt="kan şekeri başlangıçta (ybü’ye yatıştan veya yapay beslenmeye başlandıktan sonra) ve genel olarak ilk iki gün boyunca en az 4 saatte bir ölçülmelidir. "><div class="badges"><span class="bd ref">R53</span><span class="bd giku">Derece İKU</span><span class="bd cons">güçlü uzlaşı · %93</span></div><p>Kan şekeri başlangıçta (YBÜ’ye yatıştan veya yapay beslenmeye başlandıktan sonra) ve genel olarak ilk iki gün boyunca en az 4 saatte bir ölçülmelidir.</p></div>
+<div class="rec" data-cls="gA" data-txt="glukoz düzeyleri 10 mmol/l’yi aştığında insülin uygulanmalıdır. "><div class="badges"><span class="bd ref">R54</span><span class="bd gA">Derece A</span><span class="bd cons">güçlü uzlaşı · %93</span></div><p>Glukoz düzeyleri 10 mmol/L’yi aştığında insülin uygulanmalıdır.</p></div>
+<div class="rec" data-cls="gB" data-txt="gastrik beslenme intoleransı olan kritik hastalarda, birinci basamak prokinetik tedavi olarak intravenöz eritromisin kullanılmalıdır. "><div class="badges"><span class="bd ref">R13</span><span class="bd gB">Derece B</span><span class="bd cons">güçlü uzlaşı · %100</span></div><p>Gastrik beslenme intoleransı olan kritik hastalarda, birinci basamak prokinetik tedavi olarak intravenöz eritromisin kullanılmalıdır.</p></div>
+<div class="rec" data-cls="g0" data-txt="alternatif olarak, prokinetik tedavi için intravenöz metoklopramid veya metoklopramid ile eritromisin kombinasyonu kullanılabilir. "><div class="badges"><span class="bd ref">R14</span><span class="bd g0">Derece 0</span><span class="bd cons">güçlü uzlaşı · %100</span></div><p>Alternatif olarak, prokinetik tedavi için intravenöz metoklopramid veya metoklopramid ile eritromisin kombinasyonu kullanılabilir.</p></div>
+<div class="rec" data-cls="giku" data-txt="elektrolitler (potasyum, magnezyum, fosfat) ilk hafta boyunca günde en az bir kez ölçülmelidir. "><div class="badges"><span class="bd ref">R55</span><span class="bd giku">Derece İKU</span><span class="bd cons">güçlü uzlaşı · %92</span></div><p>Elektrolitler (potasyum, magnezyum, fosfat) ilk hafta boyunca günde en az bir kez ölçülmelidir.</p></div>
+<div class="rec" data-cls="giku" data-txt="yeniden beslenme (refeeding) hipofosfatemisi (&lt;0,65 mmol/l veya &gt;0,16 mmol/l düşüş) olan hastalarda elektrolitler günde 2-3 kez ölçülmeli ve gerekirse yerine konmalıdır. "><div class="badges"><span class="bd ref">R56</span><span class="bd giku">Derece İKU</span><span class="bd cons">güçlü uzlaşı · %100</span></div><p>Yeniden beslenme (refeeding) hipofosfatemisi (&lt;0,65 mmol/L veya &gt;0,16 mmol/L düşüş) olan hastalarda elektrolitler günde 2-3 kez ölçülmeli ve gerekirse yerine konmalıdır.</p></div>
+<div class="rec" data-cls="gB" data-txt="yeniden beslenme hipofosfatemisi olan hastalarda enerji desteği 48 saat süreyle kısıtlanmalı ve ardından kademeli olarak artırılmalıdır. "><div class="badges"><span class="bd ref">R57</span><span class="bd gB">Derece B</span><span class="bd cons">güçlü uzlaşı · %100</span></div><p>Yeniden beslenme hipofosfatemisi olan hastalarda enerji desteği 48 saat süreyle kısıtlanmalı ve ardından kademeli olarak artırılmalıdır.</p></div>
+  </div>
+  <div class="nores hidden" id="nores">Eşleşen madde bulunamadı.</div>
+
+  <div class="warn"><b>Uyarı.</b> Bu sayfa, ESPEN 2023 kılavuzunun öneri ve bildirimlerinin Türkçe özeti olup hızlı başvuru amaçlıdır; klinik muhakemenin ve kılavuzun tam metninin yerine geçmez.</div>
+</div>
+<script>
+const q=document.getElementById('q');
+const recs=[...document.querySelectorAll('.rec')];
+const active=new Set(['gA','gB','g0','giku','gs']);
+document.getElementById('legend').addEventListener('click',e=>{
+  const b=e.target.closest('[data-f]'); if(!b)return;
+  const f=b.dataset.f;
+  if(active.has(f)){active.delete(f);b.classList.remove('on');}else{active.add(f);b.classList.add('on');}
+  apply();
+});
+q.addEventListener('input',apply);
+function apply(){
+  const term=q.value.trim().toLowerCase();
+  let any=false;
+  recs.forEach(r=>{
+    const show=active.has(r.dataset.cls)&&(!term||r.dataset.txt.includes(term));
+    r.classList.toggle('hidden',!show); if(show)any=true;
+  });
+  const kids=[...document.getElementById('content').children];
+  for(let i=0;i<kids.length;i++){
+    const el=kids[i];
+    if(el.classList.contains('rec'))continue;
+    let has=false;
+    for(let j=i+1;j<kids.length;j++){
+      const n=kids[j];
+      if(n.classList.contains('rec')&&!n.classList.contains('hidden')){has=true;break;}
+      if(n.matches('h2.grp,.sub')){
+        if(el.matches('.sub'))break;
+        if(el.matches('h2.grp')&&n.matches('h2.grp'))break;
+      }
+    }
+    el.classList.toggle('hidden',!has);
+  }
+  document.getElementById('nores').classList.toggle('hidden',any);
+}
+</script>
+</body>
+</html>
