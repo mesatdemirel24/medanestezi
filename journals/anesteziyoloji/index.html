@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anesteziyoloji Dergileri — medanestezi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eaf0f1; --ink:#12353d; --muted:#5a717a; --line:#d4e0e2; --card:#ffffff;
+  --petrol:#0d4b55; --signal:#0a9ca3;
+  --q1:#0f766e; --q2:#2563a8; --q3:#c67a16; --q4:#6b7b82;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:780px;margin:0 auto;padding:22px 18px 70px}
+.back{display:inline-block;text-decoration:none;color:var(--muted);font-size:14px;font-weight:600;margin-bottom:14px}
+.back:hover{color:var(--signal)}
+h1{font-size:23px;margin:0 0 4px;letter-spacing:-.3px}
+.sub{color:var(--muted);font-size:14.5px;margin:0 0 16px}
+.searchbar{position:sticky;top:0;background:var(--bg);padding:10px 0;z-index:5}
+.searchbar input{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;font-size:16px;
+  background:#fbfdfd;color:var(--ink);font-family:inherit}
+.searchbar input:focus{outline:2px solid rgba(10,156,163,.3);border-color:var(--signal)}
+.filters{display:flex;flex-wrap:wrap;gap:7px;margin:4px 0 2px;font-size:12px}
+.filters .f{cursor:pointer;user-select:none;border:1px solid var(--line);background:#fff;border-radius:20px;
+  padding:5px 12px;font-weight:600;color:var(--muted);transition:all .12s}
+.filters .f.on{color:#fff;border-color:transparent}
+.filters .f.on[data-f=Q1]{background:var(--q1)} .filters .f.on[data-f=Q2]{background:var(--q2)}
+.filters .f.on[data-f=Q3]{background:var(--q3)} .filters .f.on[data-f=Q4]{background:var(--q4)}
+.filters .f.on[data-f=SCIE]{background:var(--petrol)} .filters .f.on[data-f=ESCI]{background:var(--signal)}
+.grp{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--signal);font-weight:700;
+  margin:26px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--signal);display:flex;align-items:center;gap:8px}
+.grp .cnt{font-size:11px;background:#e3f0f0;color:var(--petrol);border-radius:20px;padding:2px 9px;letter-spacing:0}
+.j{display:flex;align-items:center;justify-content:space-between;gap:12px;text-decoration:none;color:inherit;
+  background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 15px;margin:8px 0;
+  position:relative;overflow:hidden;transition:border-color .13s,transform .05s}
+.j::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--qc,var(--signal));
+  transform:scaleY(0);transform-origin:top;transition:transform .16s}
+.j:hover,.j:focus-visible{border-color:var(--signal);outline:none}
+.j:hover::before,.j:focus-visible::before{transform:scaleY(1)}
+.j:active{transform:translateY(1px)}
+.j[data-q=Q1]{--qc:var(--q1)} .j[data-q=Q2]{--qc:var(--q2)} .j[data-q=Q3]{--qc:var(--q3)} .j[data-q=Q4]{--qc:var(--q4)}
+.jn{font-size:15px;font-weight:600;line-height:1.35}
+.badges{flex:0 0 auto;display:flex;gap:6px;align-items:center}
+.bd{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;letter-spacing:.3px}
+.bd.q.Q1{background:var(--q1);color:#fff} .bd.q.Q2{background:var(--q2);color:#fff}
+.bd.q.Q3{background:var(--q3);color:#fff} .bd.q.Q4{background:var(--q4);color:#fff}
+.bd.ix.SCIE{background:var(--petrol);color:#fff}
+.bd.ix.ESCI{background:#fff;color:var(--signal);border:1px solid var(--signal)}
+.nores{text-align:center;color:var(--muted);padding:26px 0;font-size:14px}
+.hidden{display:none!important}
+.foot{margin-top:30px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;line-height:1.6}
+.foot b{color:var(--ink);font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../">← Journals</a>
+  <h1>Anesteziyoloji Dergileri</h1>
+  <p class="sub">72 dergi · çeyreklik (Q1–Q4) ve dizin (SCIE / ESCI) ile. Bir dergiye dokununca ana sayfası yeni sekmede açılır.</p>
+
+  <div class="searchbar">
+    <input id="q" type="search" placeholder="Dergi ara… (ör. pain, pediatric, cardiothoracic)">
+  </div>
+
+  <div class="filters" id="filters">
+    <span class="f on" data-f="Q1">Q1</span>
+    <span class="f on" data-f="Q2">Q2</span>
+    <span class="f on" data-f="Q3">Q3</span>
+    <span class="f on" data-f="Q4">Q4</span>
+    <span class="f on" data-f="SCIE">SCIE</span>
+    <span class="f on" data-f="ESCI">ESCI</span>
+  </div>
+
+  <div id="content">
+  <h2 class="grp" data-grp="Q1">1. Çeyrek (Q1) <span class="cnt">19</span></h2>
+  <a class="j" href="https://www.bjanaesthesia.org/" target="_blank" rel="noopener" data-q="Q1" data-idx="SCIE" data-txt="british journal of anaesthesia scie q1"><span class="jn">British Journal of Anaesthesia</span><span class="badges"><span class="bd q Q1">Q1</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://journals.lww.com/anesthesiology/" target="_blank" rel="noopener" data-q="Q1" data-idx="SCIE" data-txt="anesthesiology scie q1"><span class="jn">Anesthesiology</span><span class="badges"><span class="bd q Q1">Q1</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://journals.lww.com/ejanaesthesiology/" target="_blank" rel="noopener" data-q="Q1" data-idx="SCIE" data-txt="european journal of anaesthesiology scie q1"><span class="jn">European Journal of Anaesthesiology</span><span class="badges"><span class="bd q Q1">Q1</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://www.springer.com/journal/44254" target="_blank" rel="noopener" data-q="Q1" data-idx="ESCI" data-txt="anesthesiology and perioperative science esci q1"><span class="jn">Anesthesiology and Perioperative Science</span><span class="badges"><span class="bd q Q1">Q1</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://associationofanaesthetists-publications.onlinelibrary.wiley.com/journal/13652044" target="_blank" rel="noopener" data-q="Q1" data-idx="SCIE" data-txt="anaesthesia scie q1"><span class="jn">Anaesthesia</span><span class="badges"><span class="bd q Q1">Q1</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://www.sciencedirect.com/journal/journal-of-clinical-anesthesia" target="_blank" rel="noopener" data-q="Q1" data-idx="SCIE" data-txt="journal of clinical anesthesia scie q1"><span class="jn">Journal of Clinical Anesthesia</span><span class="badges"><span class="bd q Q1">Q1</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://journals.lww.com/pain/" target="_blank" rel="noopener" data-q="Q1" data-idx="SCIE" data-txt="pain scie q1"><span class="jn">Pain</span><span class="badges"><span class="bd q Q1">Q1</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://www.sciencedirect.com/journal/anaesthesia-critical-care-and-pain-medicine" target="_blank" rel="noopener" data-q="Q1" data-idx="SCIE" data-txt="anaesthesia critical care &amp; pain medicine scie q1"><span class="jn">Anaesthesia Critical Care &amp; Pain Medicine</span><span class="badges"><span class="bd q Q1">Q1</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://journals.lww.com/anesthesia-analgesia/" target="_blank" rel="noopener" data-q="Q1" data-idx="SCIE" data-txt="anesthesia and analgesia scie q1"><span class="jn">Anesthesia and Analgesia</span><span class="badges"><span class="bd q Q1">Q1</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://journals.lww.com/painrpts/" target="_blank" rel="noopener" data-q="Q1" data-idx="ESCI" data-txt="pain reports esci q1"><span class="jn">Pain Reports</span><span class="badges"><span class="bd q Q1">Q1</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://jaacc.biomedcentral.com/" target="_blank" rel="noopener" data-q="Q1" data-idx="ESCI" data-txt="journal of anesthesia analgesia and critical care esci q1"><span class="jn">Journal of Anesthesia Analgesia and Critical Care</span><span class="badges"><span class="bd q Q1">Q1</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://ekja.org/" target="_blank" rel="noopener" data-q="Q1" data-idx="SCIE" data-txt="korean journal of anesthesiology scie q1"><span class="jn">Korean Journal of Anesthesiology</span><span class="badges"><span class="bd q Q1">Q1</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://rapm.bmj.com/" target="_blank" rel="noopener" data-q="Q1" data-idx="SCIE" data-txt="regional anesthesia and pain medicine scie q1"><span class="jn">Regional Anesthesia and Pain Medicine</span><span class="badges"><span class="bd q Q1">Q1</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://academic.oup.com/painmedicine" target="_blank" rel="noopener" data-q="Q1" data-idx="SCIE" data-txt="pain medicine scie q1"><span class="jn">Pain Medicine</span><span class="badges"><span class="bd q Q1">Q1</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://onlinelibrary.wiley.com/journal/15322149" target="_blank" rel="noopener" data-q="Q1" data-idx="SCIE" data-txt="european journal of pain scie q1"><span class="jn">European Journal of Pain</span><span class="badges"><span class="bd q Q1">Q1</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://link.springer.com/journal/12630" target="_blank" rel="noopener" data-q="Q1" data-idx="SCIE" data-txt="canadian journal of anesthesia scie q1"><span class="jn">Canadian Journal of Anesthesia</span><span class="badges"><span class="bd q Q1">Q1</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://www.anesth-pain-med.org/" target="_blank" rel="noopener" data-q="Q1" data-idx="ESCI" data-txt="anesthesia and pain medicine esci q1"><span class="jn">Anesthesia and Pain Medicine</span><span class="badges"><span class="bd q Q1">Q1</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://www.minervamedica.it/en/journals/minerva-anestesiologica/" target="_blank" rel="noopener" data-q="Q1" data-idx="SCIE" data-txt="minerva anestesiologica scie q1"><span class="jn">Minerva Anestesiologica</span><span class="badges"><span class="bd q Q1">Q1</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://www.sciencedirect.com/journal/bja-open" target="_blank" rel="noopener" data-q="Q1" data-idx="ESCI" data-txt="bja open esci q1"><span class="jn">BJA Open</span><span class="badges"><span class="bd q Q1">Q1</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <h2 class="grp" data-grp="Q2">2. Çeyrek (Q2) <span class="cnt">17</span></h2>
+  <a class="j" href="https://www.sciencedirect.com/journal/best-practice-and-research-clinical-anaesthesiology" target="_blank" rel="noopener" data-q="Q2" data-idx="SCIE" data-txt="best practice &amp; research-clinical anaesthesiology scie q2"><span class="jn">Best Practice &amp; Research-Clinical Anaesthesiology</span><span class="badges"><span class="bd q Q2">Q2</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://bmcanesthesiol.biomedcentral.com/" target="_blank" rel="noopener" data-q="Q2" data-idx="SCIE" data-txt="bmc anesthesiology scie q2"><span class="jn">BMC Anesthesiology</span><span class="badges"><span class="bd q Q2">Q2</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://journals.lww.com/clinicalpain/" target="_blank" rel="noopener" data-q="Q2" data-idx="SCIE" data-txt="clinical journal of pain scie q2"><span class="jn">Clinical Journal of Pain</span><span class="badges"><span class="bd q Q2">Q2</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://www.painphysicianjournal.com/" target="_blank" rel="noopener" data-q="Q2" data-idx="SCIE" data-txt="pain physician scie q2"><span class="jn">Pain Physician</span><span class="badges"><span class="bd q Q2">Q2</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://www.sciencedirect.com/journal/international-journal-of-obstetric-anesthesia" target="_blank" rel="noopener" data-q="Q2" data-idx="SCIE" data-txt="international journal of obstetric anesthesia scie q2"><span class="jn">International Journal of Obstetric Anesthesia</span><span class="badges"><span class="bd q Q2">Q2</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://link.springer.com/journal/540" target="_blank" rel="noopener" data-q="Q2" data-idx="SCIE" data-txt="journal of anesthesia scie q2"><span class="jn">Journal of Anesthesia</span><span class="badges"><span class="bd q Q2">Q2</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://journals.lww.com/co-anesthesiology/" target="_blank" rel="noopener" data-q="Q2" data-idx="SCIE" data-txt="current opinion in anesthesiology scie q2"><span class="jn">Current Opinion in Anesthesiology</span><span class="badges"><span class="bd q Q2">Q2</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://www.bjaed.org/" target="_blank" rel="noopener" data-q="Q2" data-idx="ESCI" data-txt="bja education esci q2"><span class="jn">BJA Education</span><span class="badges"><span class="bd q Q2">Q2</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://journals.lww.com/jnsa/" target="_blank" rel="noopener" data-q="Q2" data-idx="SCIE" data-txt="journal of neurosurgical anesthesiology scie q2"><span class="jn">Journal of Neurosurgical Anesthesiology</span><span class="badges"><span class="bd q Q2">Q2</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://onlinelibrary.wiley.com/journal/15332500" target="_blank" rel="noopener" data-q="Q2" data-idx="SCIE" data-txt="pain practice scie q2"><span class="jn">Pain Practice</span><span class="badges"><span class="bd q Q2">Q2</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://link.springer.com/journal/10877" target="_blank" rel="noopener" data-q="Q2" data-idx="SCIE" data-txt="journal of clinical monitoring and computing scie q2"><span class="jn">Journal of Clinical Monitoring and Computing</span><span class="badges"><span class="bd q Q2">Q2</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://www.jcvaonline.com/" target="_blank" rel="noopener" data-q="Q2" data-idx="SCIE" data-txt="journal of cardiothoracic and vascular anesthesia scie q2"><span class="jn">Journal of Cardiothoracic and Vascular Anesthesia</span><span class="badges"><span class="bd q Q2">Q2</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://perioperativemedicinejournal.biomedcentral.com/" target="_blank" rel="noopener" data-q="Q2" data-idx="SCIE" data-txt="perioperative medicine scie q2"><span class="jn">Perioperative Medicine</span><span class="badges"><span class="bd q Q2">Q2</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://www.termedia.pl/Journal/Anaesthesiology_Intensive_Therapy-44" target="_blank" rel="noopener" data-q="Q2" data-idx="ESCI" data-txt="anaesthesiology intensive therapy esci q2"><span class="jn">Anaesthesiology Intensive Therapy</span><span class="badges"><span class="bd q Q2">Q2</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://www.sciencedirect.com/journal/brazilian-journal-of-anesthesiology" target="_blank" rel="noopener" data-q="Q2" data-idx="SCIE" data-txt="brazilian journal of anesthesiology scie q2"><span class="jn">Brazilian Journal of Anesthesiology</span><span class="badges"><span class="bd q Q2">Q2</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://journals.lww.com/ijaweb/" target="_blank" rel="noopener" data-q="Q2" data-idx="ESCI" data-txt="indian journal of anaesthesia esci q2"><span class="jn">Indian Journal of Anaesthesia</span><span class="badges"><span class="bd q Q2">Q2</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://onlinelibrary.wiley.com/journal/13996576" target="_blank" rel="noopener" data-q="Q2" data-idx="SCIE" data-txt="acta anaesthesiologica scandinavica scie q2"><span class="jn">Acta Anaesthesiologica Scandinavica</span><span class="badges"><span class="bd q Q2">Q2</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <h2 class="grp" data-grp="Q3">3. Çeyrek (Q3) <span class="cnt">18</span></h2>
+  <a class="j" href="https://www.dovepress.com/local-and-regional-anesthesia-journal" target="_blank" rel="noopener" data-q="Q3" data-idx="ESCI" data-txt="local and regional anesthesia esci q3"><span class="jn">Local and Regional Anesthesia</span><span class="badges"><span class="bd q Q3">Q3</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://www.jdapm.org/" target="_blank" rel="noopener" data-q="Q3" data-idx="ESCI" data-txt="journal of dental anesthesia and pain medicine esci q3"><span class="jn">Journal of Dental Anesthesia and Pain Medicine</span><span class="badges"><span class="bd q Q3">Q3</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://onlinelibrary.wiley.com/journal/14609592" target="_blank" rel="noopener" data-q="Q3" data-idx="SCIE" data-txt="pediatric anesthesia scie q3"><span class="jn">Pediatric Anesthesia</span><span class="badges"><span class="bd q Q3">Q3</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://www.hindawi.com/journals/arp/" target="_blank" rel="noopener" data-q="Q3" data-idx="ESCI" data-txt="anesthesiology research and practice esci q3"><span class="jn">Anesthesiology Research and Practice</span><span class="badges"><span class="bd q Q3">Q3</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://journals.sagepub.com/home/aic" target="_blank" rel="noopener" data-q="Q3" data-idx="SCIE" data-txt="anaesthesia and intensive care scie q3"><span class="jn">Anaesthesia and Intensive Care</span><span class="badges"><span class="bd q Q3">Q3</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://journals.lww.com/aca/" target="_blank" rel="noopener" data-q="Q3" data-idx="ESCI" data-txt="annals of cardiac anaesthesia esci q3"><span class="jn">Annals of Cardiac Anaesthesia</span><span class="badges"><span class="bd q Q3">Q3</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://journals.lww.com/anesthesiaclinics/" target="_blank" rel="noopener" data-q="Q3" data-idx="ESCI" data-txt="international anesthesiology clinics esci q3"><span class="jn">International Anesthesiology Clinics</span><span class="badges"><span class="bd q Q3">Q3</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://www.elsevier.es/es-revista-revista-espanola-anestesiologia-reanimacion-344" target="_blank" rel="noopener" data-q="Q3" data-idx="ESCI" data-txt="revista espanola de anestesiologia y reanimacion esci q3"><span class="jn">Revista Espanola de Anestesiologia y Reanimacion</span><span class="badges"><span class="bd q Q3">Q3</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://www.tandfonline.com/journals/ippc20" target="_blank" rel="noopener" data-q="Q3" data-idx="ESCI" data-txt="journal of pain &amp; palliative care pharmacotherapy esci q3"><span class="jn">Journal of Pain &amp; Palliative Care Pharmacotherapy</span><span class="badges"><span class="bd q Q3">Q3</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://jaclinicalreports.springeropen.com/" target="_blank" rel="noopener" data-q="Q3" data-idx="ESCI" data-txt="ja clinical reports esci q3"><span class="jn">JA Clinical Reports</span><span class="badges"><span class="bd q Q3">Q3</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://journals.lww.com/sja/" target="_blank" rel="noopener" data-q="Q3" data-idx="ESCI" data-txt="saudi journal of anaesthesia esci q3"><span class="jn">Saudi Journal of Anaesthesia</span><span class="badges"><span class="bd q Q3">Q3</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://www.turkjanaesthesiolreanim.org/" target="_blank" rel="noopener" data-q="Q3" data-idx="ESCI" data-txt="turkish journal of anaesthesiology and reanimation esci q3"><span class="jn">Turkish Journal of Anaesthesiology and Reanimation</span><span class="badges"><span class="bd q Q3">Q3</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://associationofanaesthetists-publications.onlinelibrary.wiley.com/journal/20518676" target="_blank" rel="noopener" data-q="Q3" data-idx="ESCI" data-txt="anaesthesia reports esci q3"><span class="jn">Anaesthesia Reports</span><span class="badges"><span class="bd q Q3">Q3</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://journals.sagepub.com/home/scv" target="_blank" rel="noopener" data-q="Q3" data-idx="ESCI" data-txt="seminars in cardiothoracic and vascular anesthesia esci q3"><span class="jn">Seminars in Cardiothoracic and Vascular Anesthesia</span><span class="badges"><span class="bd q Q3">Q3</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://link.springer.com/journal/101" target="_blank" rel="noopener" data-q="Q3" data-idx="SCIE" data-txt="anaesthesiologie scie q3"><span class="jn">Anaesthesiologie</span><span class="badges"><span class="bd q Q3">Q3</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://www.sciencedirect.com/journal/perioperative-care-and-operating-room-management" target="_blank" rel="noopener" data-q="Q3" data-idx="ESCI" data-txt="perioperative care and operating room management esci q3"><span class="jn">Perioperative Care and Operating Room Management</span><span class="badges"><span class="bd q Q3">Q3</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://link.springer.com/journal/40140" target="_blank" rel="noopener" data-q="Q3" data-idx="ESCI" data-txt="current anesthesiology reports esci q3"><span class="jn">Current Anesthesiology Reports</span><span class="badges"><span class="bd q Q3">Q3</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://joma.amegroups.org/" target="_blank" rel="noopener" data-q="Q3" data-idx="ESCI" data-txt="journal of oral and maxillofacial anesthesia esci q3"><span class="jn">Journal of Oral and Maxillofacial Anesthesia</span><span class="badges"><span class="bd q Q3">Q3</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <h2 class="grp" data-grp="Q4">4. Çeyrek (Q4) <span class="cnt">18</span></h2>
+  <a class="j" href="https://www.sciencedirect.com/journal/trends-in-anaesthesia-and-critical-care" target="_blank" rel="noopener" data-q="Q4" data-idx="ESCI" data-txt="trends in anaesthesia and critical care esci q4"><span class="jn">Trends in Anaesthesia and Critical Care</span><span class="badges"><span class="bd q Q4">Q4</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://link.springer.com/journal/482" target="_blank" rel="noopener" data-q="Q4" data-idx="SCIE" data-txt="schmerz scie q4"><span class="jn">Schmerz</span><span class="badges"><span class="bd q Q4">Q4</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://www.ai-online.info/" target="_blank" rel="noopener" data-q="Q4" data-idx="SCIE" data-txt="anästhesiologie &amp; intensivmedizin scie q4"><span class="jn">Anästhesiologie &amp; Intensivmedizin</span><span class="badges"><span class="bd q Q4">Q4</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://journals.lww.com/aacr/" target="_blank" rel="noopener" data-q="Q4" data-idx="ESCI" data-txt="a &amp; a practice esci q4"><span class="jn">A &amp; A Practice</span><span class="badges"><span class="bd q Q4">Q4</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://www.tandfonline.com/journals/teja20" target="_blank" rel="noopener" data-q="Q4" data-idx="ESCI" data-txt="egyptian journal of anaesthesia esci q4"><span class="jn">Egyptian Journal of Anaesthesia</span><span class="badges"><span class="bd q Q4">Q4</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://www.sciencedirect.com/journal/anaesthesia-and-intensive-care-medicine" target="_blank" rel="noopener" data-q="Q4" data-idx="ESCI" data-txt="anaesthesia and intensive care medicine esci q4"><span class="jn">Anaesthesia and Intensive Care Medicine</span><span class="badges"><span class="bd q Q4">Q4</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://www.thieme-connect.com/products/ejournals/journal/10.1055/s-00000071" target="_blank" rel="noopener" data-q="Q4" data-idx="SCIE" data-txt="anästhesiologie intensivmedizin notfallmedizin schmerztherapie scie q4"><span class="jn">Anästhesiologie Intensivmedizin Notfallmedizin Schmerztherapie</span><span class="badges"><span class="bd q Q4">Q4</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://www.joacc.com/" target="_blank" rel="noopener" data-q="Q4" data-idx="ESCI" data-txt="journal of obstetric anaesthesia and critical care esci q4"><span class="jn">Journal of Obstetric Anaesthesia and Critical Care</span><span class="badges"><span class="bd q Q4">Q4</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://asja.springeropen.com/" target="_blank" rel="noopener" data-q="Q4" data-idx="ESCI" data-txt="ain shams journal of anesthesiology esci q4"><span class="jn">Ain Shams Journal of Anesthesiology</span><span class="badges"><span class="bd q Q4">Q4</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://www.actaanaesth.be/" target="_blank" rel="noopener" data-q="Q4" data-idx="ESCI" data-txt="acta anaesthesiologica belgica esci q4"><span class="jn">Acta Anaesthesiologica Belgica</span><span class="badges"><span class="bd q Q4">Q4</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://www.apicareonline.com/" target="_blank" rel="noopener" data-q="Q4" data-idx="ESCI" data-txt="anaesthesia pain &amp; intensive care esci q4"><span class="jn">Anaesthesia Pain &amp; Intensive Care</span><span class="badges"><span class="bd q Q4">Q4</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://sajaa.co.za/" target="_blank" rel="noopener" data-q="Q4" data-idx="ESCI" data-txt="southern african journal of anaesthesia and analgesia esci q4"><span class="jn">Southern African Journal of Anaesthesia and Analgesia</span><span class="badges"><span class="bd q Q4">Q4</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://slja.sljol.info/" target="_blank" rel="noopener" data-q="Q4" data-idx="ESCI" data-txt="sri lankan journal of anaesthesiology esci q4"><span class="jn">Sri Lankan Journal of Anaesthesiology</span><span class="badges"><span class="bd q Q4">Q4</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://lp.thieme.de/journals/journal-of-neuroanaesthesiology-and-critical-care/2348-0548" target="_blank" rel="noopener" data-q="Q4" data-idx="ESCI" data-txt="journal of neuroanaesthesiology and critical care esci q4"><span class="jn">Journal of Neuroanaesthesiology and Critical Care</span><span class="badges"><span class="bd q Q4">Q4</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://www.prolekare.cz/en/journals/anaesthesiology-and-intensive-care-medicine" target="_blank" rel="noopener" data-q="Q4" data-idx="ESCI" data-txt="anesteziologie a intenzivni medicina esci q4"><span class="jn">Anesteziologie a Intenzivni Medicina</span><span class="badges"><span class="bd q Q4">Q4</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://www.sciencedirect.com/journal/anesthesie-et-reanimation" target="_blank" rel="noopener" data-q="Q4" data-idx="ESCI" data-txt="anesthésie &amp; réanimation esci q4"><span class="jn">Anesthésie &amp; Réanimation</span><span class="badges"><span class="bd q Q4">Q4</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://journals.lww.com/iafj/" target="_blank" rel="noopener" data-q="Q4" data-idx="ESCI" data-txt="indian anaesthetists forum esci q4"><span class="jn">Indian Anaesthetists Forum</span><span class="badges"><span class="bd q Q4">Q4</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <a class="j" href="https://www.paccj.com/" target="_blank" rel="noopener" data-q="Q4" data-idx="ESCI" data-txt="pediatric anesthesia and critical care journal esci q4"><span class="jn">Pediatric Anesthesia and Critical Care Journal</span><span class="badges"><span class="bd q Q4">Q4</span><span class="bd ix ESCI">ESCI</span></span></a>
+  </div>
+  <div class="nores hidden" id="nores">Eşleşen dergi bulunamadı.</div>
+
+  <p class="foot"><b>Not.</b> Çeyreklik (Q1–Q4) ve dizin (SCIE/ESCI) bilgileri listenin hazırlandığı dönemdeki sınıflandırmaya göredir; güncel durum için ilgili dizini kontrol edin. Bağlantılar yayıncıların resmi sayfalarına yönlendirir.</p>
+</div>
+
+<script>
+const q=document.getElementById('q');
+const items=[...document.querySelectorAll('.j')];
+const groups=[...document.querySelectorAll('.grp')];
+const activeQ=new Set(['Q1','Q2','Q3','Q4']);
+const activeI=new Set(['SCIE','ESCI']);
+const filters=document.getElementById('filters');
+
+filters.addEventListener('click',e=>{
+  const b=e.target.closest('[data-f]'); if(!b)return;
+  const f=b.dataset.f;
+  const set=(f==='SCIE'||f==='ESCI')?activeI:activeQ;
+  if(set.has(f)){set.delete(f);b.classList.remove('on');}
+  else{set.add(f);b.classList.add('on');}
+  apply();
+});
+q.addEventListener('input',apply);
+
+function apply(){
+  const term=q.value.trim().toLowerCase();
+  let anyVisible=false;
+  items.forEach(it=>{
+    const okQ=activeQ.has(it.dataset.q);
+    const okI=activeI.has(it.dataset.idx);
+    const okT=!term || it.dataset.txt.includes(term);
+    const show=okQ&&okI&&okT;
+    it.classList.toggle('hidden',!show);
+    if(show)anyVisible=true;
+  });
+  groups.forEach(g=>{
+    const grp=g.dataset.grp;
+    let has=false;
+    let n=g.nextElementSibling;
+    while(n&&n.classList.contains('j')){
+      if(!n.classList.contains('hidden')){has=true;break;}
+      n=n.nextElementSibling;
+    }
+    g.classList.toggle('hidden',!has);
+  });
+  document.getElementById('nores').classList.toggle('hidden',anyVisible);
+}
+</script>
+</body>
+</html>
