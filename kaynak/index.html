@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Kaynak — medanestezi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eaf0f1; --ink:#12353d; --muted:#5a717a; --line:#d4e0e2; --card:#ffffff;
+  --petrol:#0d4b55; --signal:#0a9ca3; --bad:#c0392b;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:660px;margin:0 auto;padding:22px 20px 60px}
+.back{display:inline-block;text-decoration:none;color:var(--muted);font-size:14px;font-weight:600;margin-bottom:14px}
+.back:hover{color:var(--signal)}
+h1{font-size:24px;margin:0 0 4px;letter-spacing:-.4px}
+.sub{color:var(--muted);font-size:15px;margin:0 0 6px}
+
+/* gate */
+.gate{min-height:70vh;display:flex;align-items:center;justify-content:center;padding:20px 0}
+.gatecard{width:100%;max-width:360px;background:var(--card);border:1px solid var(--line);
+  border-radius:16px;padding:26px 22px}
+.gatecard .lock{font-size:34px;text-align:center;margin-bottom:8px}
+.gatecard h2{font-size:18px;margin:0 0 4px;text-align:center}
+.gatecard .g-sub{color:var(--muted);font-size:13.5px;text-align:center;margin:0 0 18px}
+.gatecard label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+.gatecard input[type=password]{width:100%;font:inherit;font-size:16px;padding:11px 13px;
+  border:1px solid var(--line);border-radius:10px;background:#fbfdfd;color:var(--ink)}
+.gatecard input[type=password]:focus{outline:2px solid rgba(10,156,163,.3);border-color:var(--signal)}
+.rem{display:flex;gap:8px;align-items:center;font-size:13.5px;color:var(--muted);margin:13px 0 16px;cursor:pointer}
+.rem input{width:16px;height:16px;margin:0;accent-color:var(--signal)}
+.gatecard button{width:100%;font:inherit;font-weight:600;font-size:16px;padding:12px;border:0;border-radius:10px;
+  background:var(--petrol);color:#fff;cursor:pointer;transition:filter .15s}
+.gatecard button:hover{filter:brightness(1.1)}
+.err{color:var(--bad);font-size:13.5px;margin:12px 0 0;min-height:1.4em;text-align:center}
+
+/* content */
+#content{display:none}
+.tools{margin-top:28px;display:flex;flex-direction:column;gap:12px}
+.tool{display:block;text-decoration:none;color:inherit;background:var(--card);
+  border:1px solid var(--line);border-radius:14px;padding:18px 18px 18px 20px;
+  position:relative;overflow:hidden;transition:border-color .15s,transform .05s}
+.tool::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--signal);
+  transform:scaleY(0);transform-origin:top;transition:transform .18s}
+.tool:hover,.tool:focus-visible{border-color:var(--signal);outline:none}
+.tool:hover::before,.tool:focus-visible::before{transform:scaleY(1)}
+.tool:active{transform:translateY(1px)}
+.tool .t{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.tool h2{font-size:17px;margin:0;font-weight:600}
+.tool .tag{font-size:12px;font-weight:600;color:var(--petrol);background:#e3f0f0;
+  padding:3px 10px;border-radius:20px;flex:0 0 auto}
+.tool p{margin:6px 0 0;color:var(--muted);font-size:14.5px}
+.forget{margin-top:26px;text-align:center}
+.forget button{background:none;border:0;color:var(--muted);font:inherit;font-size:12.5px;cursor:pointer;text-decoration:underline}
+.foot{margin-top:30px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;line-height:1.55}
+.foot b{color:var(--ink);font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ŞİFRE KAPISI -->
+  <div class="gate" id="gate">
+    <form class="gatecard" id="gateForm">
+      <div class="lock">🔒</div>
+      <h2>Kaynak</h2>
+      <p class="g-sub">Bu bölüm şifreyle korunuyor.</p>
+      <label for="pw">Şifre</label>
+      <input type="password" id="pw" autocomplete="current-password" autofocus>
+      <label class="rem"><input type="checkbox" id="rem" checked> Bu cihazda hatırla</label>
+      <button type="submit">Giriş</button>
+      <p class="err" id="err"></p>
+    </form>
+  </div>
+
+  <!-- İÇERİK (şifre doğruysa görünür) -->
+  <div id="content">
+    <a class="back" href="../">← Araçlar</a>
+    <h1>Kaynak</h1>
+    <p class="sub">Sınav ve çalışma kaynakları.</p>
+
+    <nav class="tools">
+      <a class="tool" href="ydus26-aralik/">
+        <div class="t"><h2>YDUS26 Aralık</h2><span class="tag">kaynak</span></div>
+        <p>YDUS 2025 Aralık kaynak haritası — konu başlıkları ve bağlantılar.</p>
+      </a>
+    </nav>
+
+    <div class="forget"><button type="button" id="forget">Bu cihazda oturumu kapat</button></div>
+
+    <p class="foot"><b>Not.</b> Yeni kaynak kartları zamanla eklenecektir.</p>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var PASS = "Bursa";
+  var KEY = "kaynak-giris-ok";
+  var gate = document.getElementById('gate');
+  var content = document.getElementById('content');
+  var form = document.getElementById('gateForm');
+  var pw = document.getElementById('pw');
+  var rem = document.getElementById('rem');
+  var err = document.getElementById('err');
+
+  function open(){ gate.style.display='none'; content.style.display='block'; }
+
+  // daha önce bu cihazda girildiyse doğrudan aç
+  try{ if(localStorage.getItem(KEY)==="1"){ open(); } }catch(e){}
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(pw.value === PASS){
+      err.textContent="";
+      if(rem.checked){ try{ localStorage.setItem(KEY,"1"); }catch(e){} }
+      open();
+    } else {
+      err.textContent="Şifre yanlış.";
+      pw.select();
+    }
+  });
+
+  var fb = document.getElementById('forget');
+  if(fb){ fb.addEventListener('click', function(){
+    try{ localStorage.removeItem(KEY); }catch(e){}
+    location.reload();
+  }); }
+})();
+</script>
+</body>
+</html>
