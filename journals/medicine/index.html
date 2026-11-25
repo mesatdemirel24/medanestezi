@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Medicine — medanestezi</title>
+<title>Medicine Dergileri — medanestezi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -62,10 +62,10 @@ h1{font-size:23px;margin:0 0 4px;letter-spacing:-.3px}
 <div class="wrap">
   <a class="back" href="../">← Journals</a>
   <h1>Medicine</h1>
-  <p class="sub">Çeyreklik (Q1–Q4) ve dizin (SCIE / ESCI) ile; bir dergiye dokununca ana sayfası yeni sekmede açılır.</p>
+  <p class="sub">8 dergi · çeyreklik (Q1–Q4) ve dizin (SCIE / ESCI) ile. Bir dergiye dokununca ana sayfası yeni sekmede açılır.</p>
 
   <div class="searchbar">
-    <input id="q" type="search" placeholder="Ara…">
+    <input id="q" type="search" placeholder="Ara… (ör. intensive, clinical, medicina)">
   </div>
 
   <div class="filters" id="filters">
@@ -78,29 +78,18 @@ h1{font-size:23px;margin:0 0 4px;letter-spacing:-.3px}
   </div>
 
   <div id="content">
-    <!-- ========================================================================
-         BURAYA KENDİ İÇERİĞİNİ EKLE.
-         Anesteziyoloji sayfasıyla AYNI biçim. Bir "grup başlığı" ve altına
-         istediğin kadar "kart" yazarsın. Aşağıdaki ÖRNEĞİ kopyalayıp çoğalt:
-
-    <h2 class="grp" data-grp="Q1">1. ÇEYREK (Q1) <span class="cnt">1</span></h2>
-    <a class="j" href="https://www.nejm.org/" target="_blank" rel="noopener"
-       data-q="Q1" data-idx="SCIE" data-txt="new england journal of medicine scie q1">
-      <span class="jn">New England Journal of Medicine</span>
-      <span class="badges"><span class="bd q Q1">Q1</span><span class="bd ix SCIE">SCIE</span></span>
-    </a>
-
-         Kurallar:
-         • data-q  = Q1 / Q2 / Q3 / Q4   (kartın rengi ve grubu buna göre)
-         • data-idx = SCIE veya ESCI      (dizin rozeti)
-         • data-txt = aramada bulunsun diye küçük harfle: ad + dizin + çeyrek
-         • href     = derginin adresi; <span class="jn"> içine derginin adı
-         • Her çeyrek için yeni bir <h2 class="grp" data-grp="Q2">...</h2> aç,
-           başlık metnini "2. ÇEYREK (Q2)" gibi yaz, altına kartları koy.
-         ======================================================================== -->
-    <p style="text-align:center;color:var(--muted);padding:34px 0;font-size:14.5px">
-      Henüz içerik eklenmedi — yukarıdaki yorumdaki örnek biçimi kullanarak ekleyebilirsin.
-    </p>
+  <h2 class="grp" data-grp="Q1">1. Çeyrek (Q1) <span class="cnt">4</span></h2>
+  <a class="j" href="https://www.frontiersin.org/journals/medicine" target="_blank" rel="noopener" data-q="Q1" data-idx="SCIE" data-txt="frontiers in medicine scie q1"><span class="jn">Frontiers in Medicine</span><span class="badges"><span class="bd q Q1">Q1</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://www.mdpi.com/journal/jcm" target="_blank" rel="noopener" data-q="Q1" data-idx="SCIE" data-txt="journal of clinical medicine scie q1"><span class="jn">Journal of Clinical Medicine</span><span class="badges"><span class="bd q Q1">Q1</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://www.mdpi.com/journal/medicina" target="_blank" rel="noopener" data-q="Q1" data-idx="SCIE" data-txt="medicina (lithuania) scie q1"><span class="jn">Medicina (Lithuania)</span><span class="badges"><span class="bd q Q1">Q1</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://onlinelibrary.wiley.com/journal/23988835" target="_blank" rel="noopener" data-q="Q1" data-idx="ESCI" data-txt="health science reports esci q1"><span class="jn">Health Science Reports</span><span class="badges"><span class="bd q Q1">Q1</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <h2 class="grp" data-grp="Q2">2. Çeyrek (Q2) <span class="cnt">2</span></h2>
+  <a class="j" href="https://journals.sagepub.com/home/jic" target="_blank" rel="noopener" data-q="Q2" data-idx="SCIE" data-txt="journal of intensive care medicine scie q2"><span class="jn">Journal of Intensive Care Medicine</span><span class="badges"><span class="bd q Q2">Q2</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <a class="j" href="https://link.springer.com/journal/40635/articles" target="_blank" rel="noopener" data-q="Q2" data-idx="ESCI" data-txt="intensive care medicine experimental esci q2"><span class="jn">Intensive Care Medicine Experimental</span><span class="badges"><span class="bd q Q2">Q2</span><span class="bd ix ESCI">ESCI</span></span></a>
+  <h2 class="grp" data-grp="Q3">3. Çeyrek (Q3) <span class="cnt">1</span></h2>
+  <a class="j" href="https://www.signavitae.com/journal-info/overview" target="_blank" rel="noopener" data-q="Q3" data-idx="SCIE" data-txt="signa vitae scie q3"><span class="jn">Signa Vitae</span><span class="badges"><span class="bd q Q3">Q3</span><span class="bd ix SCIE">SCIE</span></span></a>
+  <h2 class="grp" data-grp="Q4">4. Çeyrek (Q4) <span class="cnt">1</span></h2>
+  <a class="j" href="https://geriatri.dergisi.org" target="_blank" rel="noopener" data-q="Q4" data-idx="SCIE" data-txt="turkish journal of geriatrics — türk geriatri dergisi scie q4"><span class="jn">Turkish Journal of Geriatrics — Türk Geriatri Dergisi</span><span class="badges"><span class="bd q Q4">Q4</span><span class="bd ix SCIE">SCIE</span></span></a>
   </div>
   <div class="nores hidden" id="nores">Eşleşen dergi bulunamadı.</div>
 
